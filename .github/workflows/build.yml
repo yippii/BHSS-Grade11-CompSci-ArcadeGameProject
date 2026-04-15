@@ -23,6 +23,7 @@ jobs:
           nuitka-version: main
           script-name: main.py
           mode: app
+          include-package: rich
           
       - name: Uploading artifact
         uses: actions/upload-artifact@v7
