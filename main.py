@@ -5,13 +5,20 @@ import shutil
 import turtle
 import rich.prompt as prompt
 
-# Setup screen
+# setup screen
 screen = turtle.Screen()
 screen.setup(width=800, height=600)
 screen.bgcolor("black")
-screen.title("Fate: The Crimson Isle")
+screen.title("fate: the crimson isle")
 screen.setup(width=600, height=400, startx=-1, starty=0)
 screen.getcanvas().winfo_toplevel().call('wm', 'attributes', '.', '-topmost', '1')
+
+# setup title turtle
+title = turtle.Turtle()
+title.hideturtle()
+title.speed(0)
+title.penup()
+title.color("crimson")
 
 def scroll_text(text):
     for char in text:
@@ -37,38 +44,31 @@ def ask_fixed_bottom(question, choices, lines_above):
     return prompt.Prompt.ask(question, choices=choices)
 
 def title_screen():
-    # Create pen
-    pen = turtle.Turtle()
-    pen.hideturtle()
-    pen.speed(0)
-    pen.penup()
-    pen.color("crimson")
+    # draw title
+    title.goto(0, 80)
+    title.write("fate", align="center", font=("courier", 48, "bold"))
 
-    # Draw title
-    pen.goto(0, 80)
-    pen.write("FATE", align="center", font=("Courier", 48, "bold"))
+    title.goto(0, 30)
+    title.write("the crimson isle", align="center", font=("courier", 24, "normal"))
 
-    pen.goto(0, 30)
-    pen.write("THE CRIMSON ISLE", align="center", font=("Courier", 24, "normal"))
+    # subtitle
+    title.color("white")
+    title.goto(0, -40)
+    title.write("a terminal roguelike adventure", align="center", font=("arial", 14, "italic"))
 
-    # Subtitle
-    pen.color("white")
-    pen.goto(0, -40)
-    pen.write("A Terminal Roguelike Adventure", align="center", font=("Arial", 14, "italic"))
+    # start instruction
+    title.goto(0, -100)
+    title.write("click anywhere to begin", align="center", font=("arial", 16, "bold"))
 
-    # Start instruction
-    pen.goto(0, -100)
-    pen.write("Click Anywhere to Begin", align="center", font=("Arial", 16, "bold"))
+    #decorative line
+    title.goto(-200, 10)
+    title.pendown()
+    title.color("crimson")
+    title.pensize(3)
+    title.forward(400)
+    title.penup()
 
-    # Decorative line
-    pen.goto(-200, 10)
-    pen.pendown()
-    pen.color("crimson")
-    pen.pensize(3)
-    pen.forward(400)
-    pen.penup()
-
-    # Click to exit
+    # click to exit
     def start_game(x, y):
         continueOnTerminal()
         game_init()
@@ -78,30 +78,21 @@ def title_screen():
 
     screen.onclick(start_game)
 
-    # Keep window open
+    # keep window open
     turtle.done()
 
 def continueOnTerminal():
     clear_gui()
+    # draw title
+    title.goto(0, 80)
+    title.write("fate", align="center", font=("courier", 48, "bold"))
 
-    # Create pen
-    pen = turtle.Turtle()
-    pen.hideturtle()
-    pen.speed(0)
-    pen.penup()
-    pen.color("crimson")
+    title.goto(0, 30)
+    title.write("the crimson isle", align="center", font=("courier", 24, "normal"))
 
-    # Draw title
-    pen.goto(0, 80)
-    pen.write("FATE", align="center", font=("Courier", 48, "bold"))
-
-    pen.goto(0, 30)
-    pen.write("THE CRIMSON ISLE", align="center", font=("Courier", 24, "normal"))
-
-    # Subtitle
-    pen.color("white")
-    pen.goto(0, -40)
-    pen.write("Continue on terminal", align="center", font=("Arial", 14, "italic"))
+    title.color("white")
+    title.goto(0, -40)
+    title.write("continue on terminal", align="center", font=("arial", 14, "italic"))
 
 def drawMap():
     clear_gui()
@@ -125,33 +116,33 @@ def drawMap():
 
 def room1():
     choice = ask_fixed_bottom(
-        "What will you do?",
+        "what will you do?",
         choices=["1", "2", "3"],
         lines_above=[
-            "You have three options",
-            "1. Venture into the Dark Forest",
-            "2. Explore the Ancient Ruins",
-            "3. Seek the Wisdom of the Old Sage",
+            "you have three options",
+            "1. venture into the dark forest",
+            "2. explore the ancient ruins",
+            "3. seek the wisdom of the old sage",
         ],
     )
 
     match choice:
         case "1":
             clear_screen()
-            scroll_text("You venture into the Dark Forest, where you encounter a fierce dragon.")
+            scroll_text("you venture into the dark forest, where you encounter a fierce dragon.")
             time.sleep(2)
-            scroll_text("You engage in a fierce battle and emerge victorious, earning the respect of the dragon.")
+            scroll_text("you engage in a fierce battle and emerge victorious, earning the respect of the dragon.")
         case "2":
             clear_screen()
-            scroll_text("You explore the Ancient Ruins and discover a hidden treasure.")
+            scroll_text("you explore the ancient ruins and discover a hidden treasure.")
         case "3":
             clear_screen()
-            scroll_text("You seek the Wisdom of the Old Sage and gain great insight.")
+            scroll_text("you seek the wisdom of the old sage and gain great insight.")
 
 def game_init():
-    scroll_text("Fate: The Crimson Isle")
+    scroll_text("fate: the crimson isle")
     time.sleep(2)
-    scroll_text("You are the explorer, tasked with exploring the single island called the Crimson Isle.")
+    scroll_text("you are the explorer, tasked with exploring the single island called the crimson isle.")
     time.sleep(2)
     clear_screen()
 
