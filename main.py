@@ -2,6 +2,7 @@ import time
 import turtle
 import methods
 import constants
+import values
 
 # setup screen
 screen = turtle.Screen()
@@ -23,7 +24,7 @@ title.color("crimson")
 def title_screen():
     # draw title
     title.goto(0, 80)
-    title.write("fate", align="center", font=("courier", 48, "bold"))
+    title.write("Fate", align="center", font=("courier", 48, "bold"))
 
     title.goto(0, 30)
     title.write("the crimson isle", align="center", font=("courier", 24, "normal"))
@@ -61,7 +62,7 @@ def title_screen():
 def continueOnTerminal():
     methods.clear_gui(screen)
     # draw title
-    title.goto(0, 0)
+    title.goto(0, 80)
     title.write("Fate", align="center", font=("courier", 48, "bold"))
 
     title.goto(0, 30)
@@ -80,6 +81,7 @@ def drawMap():
     pen.speed(100000)
     pen.penup()
     pen.color("white")
+
     pen.goto(-200, 180)
     pen.pendown()
 

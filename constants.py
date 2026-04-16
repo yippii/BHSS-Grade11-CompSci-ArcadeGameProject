@@ -1,19 +1,30 @@
-m = "Miss!"
-h = "Hit!"
-ph = "Perfect Hit!"
+missed = "Miss!"
+hit = "Hit!"
+perfect_hit = "Perfect Hit!"
 
-no_s = "No Stamina Lost."
-sw1 = "You used a sword!."
-no_sw = "Your sword remains strong!"
-a1 = "You used an arrow!"
-tno = "That is not an option!"
-wyd = "What do you do?\n: "
-nowe = "You do not have this weapon!"
+stamina_lost0 = "No Stamina Lost."
+stamina_lost1 = "You lost a stamina."
+stamina_lost2 = "You lost two stamina."
+
+sword_no_sword_wear = "Your sword remains strong!"
+sword_sword_wear1 = "You used a sword!."
+
+bow_arrow_used = "You used an arrow!"
+bow_arrow_used_up = "You do not have any more arrows!"
+
+wyd = "What will you do?"
+
+no_weapon = "You do not have this weapon!"
+
 blocker = 15*"-"
 
 # Stamina system
 MAX_STAMINA = 100
 STARTING_STAMINA = 50
+
+# Amounts of initial items in inventory
+SWORD_AMOUNT = 5
+ARROW_AMOUNT = 5
 
 # Actions (stamina costs)
 PICKUP_COIN_COST = -1
