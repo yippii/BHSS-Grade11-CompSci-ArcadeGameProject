@@ -1,126 +1,189 @@
 import random as r
-import constants
 
+#This function controls the basic combat, allowing the user to choose their actions
+def found_monster_actions():
+    global battle_action
+    while battle == True:
+        try:
+            print(blocker)
+            print("You stumble upon a " + monster + "!")
+            print(" 1 - Attack\n 2 - Inventory\n 3 - Flee")
+            battle_action = int(input(wyd))
+            return
+        except:
+            print(blocker)
+            print(tno)
+
+#This function controls which attack function is called based on the user's choice
+def battle_attack_action():
+    global battle
+    while battle == True:
+        try:
+            print(blocker)
+            print("Attack")
+            print(blocker)
+            print(" 1 - " + weapon1 + "\n 2 - " + weapon2 + "\n 3 - " + weapon3 + "\n 5 - Back")
+            battle_attack = int(input(wyd))
+            if battle_attack == 1:
+                sword_fighting()
+            elif battle_attack == 2:
+                bow_fighting()
+            elif battle_attack == 5:
+                return
+            else:
+                print(blocker)
+                print(tno)
+        except:
+            print(blocker)
+            print(tno)
+
+#This weapon checks if weapons have been discovered. If discovered, it shares their name 
+def weapon_checker():
+    if have_sword == True:
+        weapon1 = "Sword"
+    else:
+        weapon1 = "???"
+    if have_bow == True:
+        weapon2 = "Bow"
+    else:
+        weapon2 = "???"
+    if have_crossbow == True:
+        weapon3 = "Crossbow"
+    else:
+        weapon3 = "???"
+
+#This function controls the sword fighting process, using swords and stamina
 def sword_fighting():
     global sword_amount
     if sword_amount >= 1:
         while battle == True:
             global stamina
-            sword_battle_roll = r.randint(1, 6)
-
-            print(constants.blocker)
+            print(blocker)
             print("You use your sword!")
-
-            if sword_battle_roll <= 3:
-                print(constants.m)
+            sword_battle_roll = r.randint(1,6)
+            if sword_battle_roll <= 2:
+                print(m)
                 miss_stamina_loss = r.randint(1,2)
                 if miss_stamina_loss == 1:
-                    print(constants.s1)
+                    print(s1)
+                    print(no_sw)
                     stamina = stamina - 1
                 else:
-                    print(constants.no_s)
+                    print(no_s)
+                    print(no_sw)
                 return
-            elif sword_battle_roll <= 5:
-                print(constants.h)
-                print(constants.s1)
+            elif sword_battle_roll <= 4:
+                print(h)
+                print(s1)
+                print(sw1)
                 stamina = stamina - 1
                 sword_amount = sword_amount - 1
                 return
             else:                    
-                print(constants.ph)
-                print(constants.no_s)
+                print(ph)
+                print(no_s)
+                print(sw1)
                 sword_amount = sword_amount - 1
                 return
     else:
-        print(constants.blocker)
-        print("You do not have any more swords.")
+        print(blocker)
+        print(nowe)
         return
 
+#This function controls the bow fighting process, using arrows and stamina
 def bow_fighting():
     global arrow_amount
-    if arrow_amount >= 1:
-        while battle == True:
-            global stamina
-            print(blocker)
-            print("You use your bow!")
-            if bow_level == 1:
+    global have_bow
+    if have_bow == True:
+        if arrow_amount >= 1:
+            while battle == True:
+                global stamina
+                print(blocker)
+                print("You use your bow!")
                 bow_battle_roll = r.randint(1,6)
                 if bow_battle_roll <= 3:
                     print(m)
                     print(s2)
+                    print(a1)
                     stamina = stamina - 2
+                    arrow_amount = arrow_amount - 1
                     return
                 else:
                     print(ph)
                     print(no_s)
+                    print(a1)
+                    arrow_amount = arrow_amount - 1
                     return
             else:
-                print("You do not have a bow.")
+                print(nowe)
                 return
+        else:
+            print(blocker)
+            print("You do not have any more arrows!")
     else:
         print(blocker)
-        print("You do not have any more arrows.")
-    
-def found_monster_actions():
-    global battle_action
-    print("You stumble upon a " + monster + "!")
-    print(" 1 - Attack\n 2 - Use item\n 3 - Flee")
-    battle_action = int(input("What do you do?\n: "))
-    
-def battle_attack_action():
-    global battle
-    while battle == True:
-        print(blocker)
-        print(" 1 - " + weapon1 + "\n 2 - " + weapon2 + "\n 5 - Back")
-        battle_attack = int(input("What do you use?\n: "))
-        if battle_attack == 1:
-            sword_fighting()
-        elif battle_attack == 2:
-            bow_fighting()
-        elif battle_attack == 5:
-            return
-        else:
-            print(blocker)
-            print("You do not have another weapon!")
+        print(nowe)
 
+#This function controls which function and process is called based ont he user's choice
 def battle_inventory_action():
-    global stamina
-    global s_pot_num
     global sword_amount
     global arrow_amount
-    print(blocker)
-    print("Inventory: ")
-    print(blocker)
     while battle == True:
-        print(" 1 - Stamina Potion\n 2 - Sword\n 3 - Arrows\n 4 - Special Items\n 5 - Back")
-        battle_inv = int(input("What do you use?\n: "))
-        if battle_inv == 1:
+        try:
             print(blocker)
-            if s_pot_num >= 1:
-                print("You used a stamina potion!")
+            print("Inventory: ")
+            print(blocker)
+            print(" 1 - Stamina Potion\n 2 - Swords\n 3 - Arrows\n 4 - Special Items\n 5 - Back")
+            battle_inv = int(input(wyd))
+            if battle_inv == 1:
+                s_pot_inv()
+            elif battle_inv == 2:
                 print(blocker)
-                s_pot_num = s_pot_num - 1
-                stamina = stamina + 25
+                print("You have " + str(sword_amount) + " swords.")
+            elif battle_inv == 3:
+                print(blocker)
+                print("You have " + str(arrow_amount) + " arrows.")
+            elif battle_inv == 4:
+                print(blocker)
+                print("You have " + str(keys_amount) + " keys")
+            elif battle_inv == 5:
+                return
             else:
-                print("You do not have a stamina potion!")
                 print(blocker)
-        elif battle_inv == 2:
+                print(tno)
+        except:
             print(blocker)
-            print("You have " + sword_amount + "swords.")
-            return
-        elif battle_inv == 3:
+            print(tno)
+    
+#This function controls the usage of stamina potions
+def s_pot_inv():
+    global stamina
+    global s_pot_num
+    while battle == True:
+        try:
             print(blocker)
-            print("You have " + arrow_amount + "arrows.")
-            return
-        elif battle_inv == 4:
+            print("You have " + str(s_pot_num) + " Stamina Potions")
+            print(" 1 - Yes\n 2 - No")
+            s_pot_use = int(input("Would you like to use a stamina potion?\n: "))
+            if s_pot_use == 1:
+                if s_pot_num >= 1:
+                    print(blocker)
+                    print("You used a stamina potion!")
+                    s_pot_num = s_pot_num - 1
+                    stamina = stamina + 25
+                else:
+                    print(blocker)
+                    print("You do not have a stamina potion!")
+            elif s_pot_use == 2:
+                return
+            else:
+                print(blocker)
+                print(tno)
+        except:
             print(blocker)
-            
-        elif battle_inv == 5:
-            return
-        else:
-            print(blocker)
-            print("That is not an option.")
+            print(tno)
 
+#This function allows the user to flee the battle, ending it prematurely
 def battle_flee_action():
     global stamina
     global battle
@@ -130,24 +193,24 @@ def battle_flee_action():
     stamina = stamina - 5
     battle = False
 
-
 stamina = 100
 battle = True  
 monster = "Goblin"
 battle_attack = 0
 
+have_sword = True
+have_bow = True
+have_crossbow = False
 
-weapon1 = "Sword"
 sword_amount = 5
+arrow_amount = 5
 
-weapon2 = "Bow"
-
-inv1 = "Stamina Potion"
+keys_amount = 2
 s_pot_num = 3
 
 
 while battle == True:
-    print(blocker)
+    weapon_checker()
     found_monster_actions()
     if battle_action == 1:
         battle_attack_action()
@@ -155,7 +218,3 @@ while battle == True:
         battle_inventory_action()
     elif battle_action == 3:
         battle_flee_action()
-    else:
-        print(blocker)
-        print("That is not an option!")
-        

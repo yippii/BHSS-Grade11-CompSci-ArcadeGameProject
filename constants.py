@@ -3,7 +3,13 @@ h = "Hit!"
 ph = "Perfect Hit!"
 
 no_s = "No Stamina Lost."
-blocker = "--------------------"
+sw1 = "You used a sword!."
+no_sw = "Your sword remains strong!"
+a1 = "You used an arrow!"
+tno = "That is not an option!"
+wyd = "What do you do?\n: "
+nowe = "You do not have this weapon!"
+blocker = 15*"-"
 
 # Stamina system
 MAX_STAMINA = 100
