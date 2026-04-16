@@ -24,8 +24,9 @@ jobs:
         with:
           nuitka-version: main
           script-name: main.py
-          mode: standalone
+          mode: onefile
           include-package: rich
+          enable-plugins: tk-inter
 
       - name: Uploading artifact
         uses: actions/upload-artifact@v7
