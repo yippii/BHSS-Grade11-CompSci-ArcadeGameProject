@@ -52,7 +52,7 @@ def title_screen():
     def start_game(x, y):
         continueOnTerminal()
         game_init()
-        drawMap()
+        drawMap1()
         #level2()
         room1()
 
@@ -73,29 +73,124 @@ def continueOnTerminal():
     title.write("continue on terminal", align="center", font=("arial", 14, "italic"))
     screen.update()
 
-def drawMap():
+def drawMap1():
     methods.clear_gui(screen)
+
+    map_str = """
++----------+------+------+-------+
+|          |      |      |       |
+|          +------+      |  L2   |
+|          |             |       |
+|    MH    +------+      +  -----+
+|                                |
++----+   +  --------------+      |
+         |         |  S   |      |
+     |   |   P     +------+      |
+ Arm |   +---------+      |      |
+     |   |                |      |
+     |   |        MH      |      +-------+
++----+   +  --------------+      |       |
+|                                        |
+|    X                           +-------+
+|                                |
++--------+  --------+  ----------+
+         |          |            |
+         +----------+------------+
+"""
+    parse_map(map_str, cell_size=18)
+
+def drawMap2():
+    methods.clear_gui(screen)
+
+    map_str = """
++------------------------+-------+
+|                        |       |
+|          +------+      |  L2   |
+|          |      |      |       |
+|    MH    +------+      +-------+
+|                                |
++----+   +----------------+      |
+     |   |         |  S   |      |
+     |   |   P     +------+      |
+ Arm |   +---------+      |      |
+     |                    |      |
+     |                    |      +-------+
++----+.  -----------------+      |       |
+|                                |       |
+|    X                           +-------+
+|                                |
++--------+----------+------------+
+         |          |            |
+         +----------+------------+
+"""
+    parse_map(map_str, cell_size=18)
+
+def parse_map(map_str, cell_size=20):
+    lines = map_str.strip('\n').split('\n')
+    
+    max_width = max(len(line) for line in lines)
+
+    lines = [line.ljust(max_width) for line in lines]
+    
+    rows = len(lines)
+    cols = max_width
+
+    start_x = -(cols * cell_size) // 2
+    start_y = (rows * cell_size) // 2
+
     pen = turtle.Turtle()
-    pen.pensize(5)
+    pen.pensize(2)
     pen.hideturtle()
-    pen.speed(100000)
+    pen.speed(0)
     pen.penup()
     pen.color("white")
 
-    pen.goto(-200, 180)
-    pen.pendown()
+    # Draw horizontal walls (-)
+    for r, line in enumerate(lines):
+        c = 0
+        while c < len(line):
+            if line[c] == '-':
+                # Find run length
+                start = c
+                while c < len(line) and line[c] == '-':
+                    c += 1
+                length = (c - start) * cell_size
+                x = start_x + start * cell_size
+                y = start_y - r * cell_size
+                pen.goto(x, y)
+                pen.pendown()
+                pen.goto(x + length, y)
+                pen.penup()
+            else:
+                c += 1
 
-    # map
-    for i in range(len(constants.mapData)):
-        if i % 2 == 0:
-            pen.forward(constants.mapData[i])
-        else:
-            if constants.mapData[i] == "l":
-                pen.left(90)
-            elif constants.mapData[i] == "r":
-                pen.right(90)
+    # Draw vertical walls (|)
+    for c in range(cols):
+        r = 0
+        while r < rows:
+            if r < len(lines) and c < len(lines[r]) and lines[r][c] == '|':
+                start = r
+                while r < rows and c < len(lines[r]) and lines[r][c] == '|':
+                    r += 1
+                length = (r - start) * cell_size
+                x = start_x + c * cell_size
+                y = start_y - start * cell_size
+                pen.goto(x, y)
+                pen.pendown()
+                pen.goto(x, y - length)
+                pen.penup()
+            else:
+                r += 1
 
-    pen.goto(-200, 180)
+    # Draw corners (+)
+    for r, line in enumerate(lines):
+        for c, ch in enumerate(line):
+            if ch == '+':
+                x = start_x + c * cell_size
+                y = start_y - r * cell_size
+                pen.goto(x, y)
+                pen.dot(4, "white")
+
     screen.update()
 
 def level2():
