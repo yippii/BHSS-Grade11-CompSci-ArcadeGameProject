@@ -103,7 +103,7 @@ def drawMapL1():
 """
     parse_map(map_str, cell_size=18)
 
-def drawMap2():
+def drawMapL2():
     methods.clear_gui(screen)
 
     map_str = """

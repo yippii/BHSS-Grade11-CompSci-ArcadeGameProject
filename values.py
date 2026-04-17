@@ -4,6 +4,7 @@ import constants
 weapon1 = "???"
 weapon2 = "???"
 weapon3 = "???"
+max_stamina = 100
 stamina = 50
 sword_amount = 5
 arrow_amount = 5
