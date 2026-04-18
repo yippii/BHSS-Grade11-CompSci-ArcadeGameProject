@@ -112,7 +112,7 @@ def drawMapL2():
         |     |   |                         | 
         |     |   +-----+---   ---+    -----+
         |     |         |         |         |
-    +---+     +------+  +---------+         |
+    +---+  -  +------+  +---------+         |
     |                |            |         |
     |                |            +---------+
     +----------------------------+
@@ -332,9 +332,9 @@ def L2():
             Forgemaster()
         case "3":
             methods.clear_screen()
-            L2part2()
+            L2room2()
 
-def L2part2():
+def L2room2():
     knight = turtle.Turtle()
     methods.setup_knight(knight)
     knight.goto(150, 140)
@@ -357,6 +357,7 @@ def L2part2():
             L2()
 
 # le bron james
+# le bron
 #------------------------ ROOMS -------------------------------------------------------------------------------------------------------------
 def hm():
     methods.clear_screen()
@@ -376,7 +377,12 @@ def hm():
             combat.battle_menu()
             time.sleep(2)
             methods.scroll_text("You defeated the goblin! You find a blue key and a stamina potion.")
+            
             # Add blue key and stamina potion to inventory here
+            constants.blue_key1 = True
+            values.stamina = values.stamina + constants.STAMINA_POTION_GAIN
+            methods.scroll_text("You have"+constants.STAMINA_POTION_DESC + "potions left!")
+            
             room2()
         case "2":
             methods.scroll_text("You back away slowly and leave the mess hall.")
@@ -405,6 +411,8 @@ def armory():
             combat.battle_menu()
             time.sleep(2)
             methods.scroll_text("You defeated the goblin! You found 5 swords.")
+            values.sword_amount = values.sword_amount + constants.SWORDS_GAIN
+            methods.scroll_text("You Have" + values.sword_amount + "swords left!")
             room2()
         case "2":
             methods.scroll_text("You back away slowly and leave the mess hall.")
@@ -421,7 +429,7 @@ def armory():
 
 def closet():
     methods.clear_screen()
-    methods.scroll_text("You enter The Forgemaster's Vault. You find a goblin trying on different pieces of armor.")
+    methods.scroll_text(".")
     #Puzzle room...
     time.sleep(1.5)
     room3()
@@ -444,6 +452,10 @@ def warChest():
             combat.battle_menu()
             time.sleep(2)
             methods.scroll_text("You defeated the goblin! You found 5 swords.")
+
+            values.sword_amount = values.sword_amount + constants.SWORDS_GAIN
+            methods.scroll_text("You Have" + values.sword_amount + "swords left!")
+
             room3()
         case "2":
             methods.scroll_text("You back away slowly and leave the mess hall.")
@@ -456,6 +468,8 @@ def lab():
     methods.clear_screen()
     methods.scroll_text("As you enter the alchemy lab, you find a bunch of documents explaining how to make a stamina potion.")
     # + Stamina 
+    values.stamina = values.stamina + constants.STAMINA_POTION_GAIN
+    methods.scroll_text("You have" + constants.STAMINA_POTION_DESC + "potions left!")
     time.sleep(1.5)
     room3()
 
@@ -463,6 +477,8 @@ def elixirVault():
     methods.clear_screen()
     methods.scroll_text("As you enter the alchemy lab, you find a bunch of documents explaining how to make a stamina potion.")
     # + Stamina 
+    values.stamina = values.stamina + constants.STAMINA_POTION_GAIN
+    methods.scroll_text("You have" + constants.STAMINA_POTION_DESC + "potions left!")
     time.sleep(1.5)
     room4()
 
@@ -484,6 +500,10 @@ def bladeVault():
             combat.battle_menu()
             time.sleep(2)
             methods.scroll_text("You defeated the goblin! You found 5 swords.")
+
+            values.sword_amount = values.sword_amount + constants.SWORDS_GAIN
+            methods.scroll_text("You Have" + values.sword_amount + "swords left!")
+
             room4()
         case "2":
             methods.scroll_text("You back away slowly and leave the mess hall.")
@@ -510,6 +530,11 @@ def archeryRange():
             combat.battle_menu()
             time.sleep(2)
             methods.scroll_text("You defeated the goblin! You take his bow.")
+
+            values.have_bow = True 
+            values.arrow_amount = values.arrow_amount + constants.ARROW_GAIN
+            methods.scroll_text("You Have" + values.arrow_amount + " arrows left!")
+
             room4()
         case "2":
             methods.scroll_text("You back away slowly and leave the archery range.")
@@ -522,6 +547,8 @@ def Herbalist():
     methods.clear_screen()
     methods.scroll_text("As you enter the alchemy lab, you find a bunch of documents explaining how to make a stamina potion.")
     # + Stamina 
+    values.stamina = values.stamina + constants.STAMINA_POTION_GAIN
+    methods.scroll_text("You have" + constants.STAMINA_POTION_DESC + "potions left!")
     time.sleep(1.5)
     room3()
 
@@ -543,6 +570,8 @@ def Forgemaster():
             combat.battle_menu()
             time.sleep(2)
             methods.scroll_text("You defeated the goblin! You found 5 swords.")
+            values.sword_amount = values.sword_amount + constants.SWORDS_GAIN
+            methods.scroll_text("You Have" + values.sword_amount + "swords left!")
             room4()
         case "2":
             methods.scroll_text("You back away slowly and leave the mess hall.")

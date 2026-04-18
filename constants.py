@@ -27,6 +27,8 @@ KILL_GOBLIN_CROSSBOW_COST = -4
 
 # Rewards
 STAMINA_POTION_GAIN = 25
+SWORDS_GAIN = 3
+ARROW_GAIN = 4
 
 PICKUP_COIN_DESC = "Pick up coin (-1 stamina)"
 ENTER_ROOM_DESC = "Enter room (-5 stamina)"
@@ -34,6 +36,15 @@ KILL_GOBLIN_SWORD_DESC = "Kill goblin with sword (-2 stamina)"
 KILL_GOBLIN_BOW_DESC = "Kill goblin with bow (-3 stamina)"
 KILL_GOBLIN_CROSSBOW_DESC = "Kill goblin with crossbow (-4 stamina)"
 STAMINA_POTION_DESC = "Stamina potion (+25 stamina)"
+
+#keys
+blue_key1 = False
+blue_key2 = False
+blue_key3 = False
+
+green_key1 = False
+green_key2 = False
+green_key3 = False
 
 old_mapData = [
     # Outer rectangle 
