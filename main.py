@@ -87,11 +87,11 @@ def drawMapL1():
      |                            |
      |                            |
 +----+    +  --------------+      |
-|         |            S   |      |
-|    |    |   P     +------+      |
+|         |                |      |
+|    |    |         +------+      |
 +----+    +---------+      |      +-------+
-|         |         |      |      |   z   |
-|    |    |    MH   |      |      +-------+
+|         |         |      |      |       |
+|    |    |         |      |      +-------+
 +----+----+  --------------+      |       |
 |                                         |
 |                                 +-------+
@@ -101,28 +101,27 @@ def drawMapL1():
 """
     parse_map(map_str, cell_size=18)
 
-def drawMap2():
+def drawMapL2():
 
     map_str = """
-+----------+             +-----------+
-| L3       |             |           |
-|          |             |           |
-|          |             |           |
-|          +-------------+           |
-|                                    |
-+----+   +--------------- +          |
-     |             |      |          |
-     +---+         +------+          |
-         +---------+      |          |
-         |                |          |
-         |                |          +---+
-+--------------------   --+              |
-|                                        |
-|                                +-------+
-|                                |
-+-------------------+   ---------+
-                    |            |
-                    +------------+
+        +-----------------+          +------+
+        |                 |          |      |
+        |                 |          |      |
+        |     +---+       +----------+      |
+        |     |   |                         |
+        |     |   |                         | 
+        |     |   +-----+---------+    -----+
+        |     |         |         |         |
+    +---+     +------+  +---------+         |
+    |                |            |         |
+    |                |            +---------+
+    +----------------------------+
+    |                            |
+    |                            |
+    |                            |
+    |                            |
+    |                            |
+    +----------------------------+
 """
     parse_map(map_str, cell_size=18)
 
@@ -266,8 +265,33 @@ def room3():
         ["1", "2", "3"],
         [
             "you have three options",
-            "1. explore the archery range",
+            "1. explore the     Elixir Vault",
             "2. venture into the blade vault",
+        ],
+    )
+
+    match choice:
+        case "1":
+            elixirVault()
+        case "2":
+            bladeVault()
+        case "le bron":
+            methods.clear_screen()
+            methods.scroll_text("you seek the wisdom of the king le bron james")
+
+def room4():
+    knight = turtle.Turtle()
+    methods.setup_knight(knight)
+    knight.goto(150, 140)
+    methods.scroll_text("As you turn, the next hallway reveals only two doors: an archery range and a blade vault.")
+
+    choice = methods.ask_fixed_bottom(
+        "what will you do?",
+        ["1", "2", "3"],
+        [
+            "you have three options",
+            "1. explore the archery range",
+            "2. Explore into a staircase.",
         ],
     )
 
@@ -275,10 +299,41 @@ def room3():
         case "1":
             archeryRange()
         case "2":
-            bladeVault()
-        case "le bron":
+            L2()
+
+def L2():
+    methods.clear_screen()
+    drawMapL2()
+    knight = turtle.Turtle()
+    methods.setup_knight(knight)
+    knight.goto(105, 98)
+
+    methods.scroll_text("As you venture down into the dungeon, you reach the lowest level. You can hear the screams of the Necromancer's Experiments.")
+    time.sleep(1.5)
+    methods.scroll_text("")
+
+    choice = methods.ask_fixed_bottom(
+        "what will you do?",
+        ["1", "2", "3"],
+        [
+            "you have three options",
+            "1. Enter the mess hall",
+            "2. Enter the armory",
+            "3. Continue exploring",
+        ],
+    )
+
+    match choice:
+        case "1":
             methods.clear_screen()
-            methods.scroll_text("you seek the wisdom of the king le bron james")
+            hm()
+        case "2":
+            methods.clear_screen()
+            armory()
+        case "3":
+            methods.clear_screen()
+            room2()
+
 
 
 def hm():
@@ -376,6 +431,13 @@ def warChest():
             room3()
 
 def lab():
+    methods.clear_screen()
+    methods.scroll_text("As you enter the alchemy lab, you find a bunch of documents explaining how to make a stamina potion.")
+    # + Stamina 
+    time.sleep(1.5)
+    room3()
+
+def elixirVault():
     methods.clear_screen()
     methods.scroll_text("As you enter the alchemy lab, you find a bunch of documents explaining how to make a stamina potion.")
     # + Stamina 
