@@ -101,30 +101,30 @@ def drawMapL1():
 """
     parse_map(map_str, cell_size=18)
 
-# def drawMap2():
+def drawMap2():
 
-#     map_str = """
-# +----------+             +-----------+
-# | L3       |             |           |
-# |          |             |           |
-# |          |             |           |
-# |          +-------------+           |
-# |                                    |
-# +----+   +--------------- +          |
-#      |             |      |          |
-#      +---+         +------+          |
-#          +---------+      |          |
-#          |                |          |
-#          |                |          +---+
-# +--------------------   --+              |
-# |                                        |
-# |                                +-------+
-# |                                |
-# +-------------------+   ---------+
-#                     |            |
-#                     +------------+
-# """
-#     parse_map(map_str, cell_size=18)
+    map_str = """
++----------+             +-----------+
+| L3       |             |           |
+|          |             |           |
+|          |             |           |
+|          +-------------+           |
+|                                    |
++----+   +--------------- +          |
+     |             |      |          |
+     +---+         +------+          |
+         +---------+      |          |
+         |                |          |
+         |                |          +---+
++--------------------   --+              |
+|                                        |
+|                                +-------+
+|                                |
++-------------------+   ---------+
+                    |            |
+                    +------------+
+"""
+    parse_map(map_str, cell_size=18)
 
 def parse_map(map_str, cell_size=20):
     lines = map_str.strip('\n').split('\n')
@@ -211,24 +211,26 @@ def room1():
         ["1", "2", "3"],
         [
             "you have three options",
-            "1. Enter the left room",
-            "2. Enter the right room",
+            "1. Enter the mess hall",
+            "2. Enter the armory",
             "3. Continue exploring",
         ],
     )
 
     match choice:
         case "1":
+            methods.clear_screen()
             hm()
         case "2":
             methods.clear_screen()
-            methods.scroll_text("you explore the ancient ruins and discover a hidden treasure.")
+            armory()
         case "3":
             methods.clear_screen()
-            methods.scroll_text("you seek the wisdom of the old sage and gain great insight.")
+            room2()
 
 def room2():
-    drawMapL2()
+    methods.clear_screen()
+    methods.scroll_text("You turn to a new hallway, and the first thing you see is a right door, a left door, and a door at the end, hinting at a mystery.")
     knight = turtle.Turtle()
     methods.setup_knight(knight)
     knight.goto(150, 140)
@@ -238,63 +240,199 @@ def room2():
         ["1", "2", "3"],
         [
             "you have three options",
-            "1. venture into the dark forest",
-            "2. explore the ancient ruins",
-            "3. seek the wisdom of the old sage",
+            "1. venture into the right door",
+            "2. explore the War Chest room",
+            "3. enter the Alchemy Lab",
         ],
     )
 
     match choice:
         case "1":
-            methods.clear_screen()
-            methods.scroll_text("you venture into the dark forest, where you encounter a fierce dragon.")
-            time.sleep(2)
-            methods.scroll_text("you engage in a fierce battle and emerge victorious, earning the respect of the dragon.")
+            closet()
         case "2":
-            methods.clear_screen()
-            methods.scroll_text("you explore the ancient ruins and discover a hidden treasure.")
+            warChest()
         case "3":
-            methods.clear_screen()
-            methods.scroll_text("you seek the wisdom of the old sage and gain great insight.")
+            lab()
 
 
 def room3():
-    drawMapL3()
     knight = turtle.Turtle()
     methods.setup_knight(knight)
     knight.goto(150, 140)
+    methods.scroll_text("As you turn, the next hallway reveals only two doors: an archery range and a blade vault.")
 
     choice = methods.ask_fixed_bottom(
         "what will you do?",
         ["1", "2", "3"],
         [
             "you have three options",
-            "1. venture into the dark forest",
-            "2. explore the ancient ruins",
-            "3. seek the wisdom of the old sage",
+            "1. explore the archery range",
+            "2. venture into the blade vault",
         ],
     )
 
     match choice:
         case "1":
-            methods.clear_screen()
-            methods.scroll_text("you venture into the dark forest, where you encounter a fierce dragon.")
-            time.sleep(2)
-            methods.scroll_text("you engage in a fierce battle and emerge victorious, earning the respect of the dragon.")
+            archeryRange()
         case "2":
+            bladeVault()
+        case "le bron":
             methods.clear_screen()
-            methods.scroll_text("you explore the ancient ruins and discover a hidden treasure.")
-        case "3":
-            methods.clear_screen()
-            methods.scroll_text("you seek the wisdom of the old sage and gain great insight.")
+            methods.scroll_text("you seek the wisdom of the king le bron james")
 
 
 def hm():
     methods.clear_screen()
-    methods.scroll_text("you enter into the mess hall, where you encounter a fierce dragon.")
-    combat.battle_menu()
-    time.sleep(2)
-    methods.scroll_text("you engage in a fierce battle and emerge victorious, earning the respect of the dragon.")
+    methods.scroll_text("you enter into the mess hall, where you encounter Goblin eating pizza.")
+
+    choice = methods.ask_fixed_bottom(
+        "what will you do?",
+        ["1", "2", "3"],
+        [
+            "you have two options",
+            "1. Attack the goblin",
+            "2. Leave",
+        ],
+    )
+    match choice:
+        case "1":
+            combat.battle_menu()
+            time.sleep(2)
+            methods.scroll_text("You defeated the goblin! You find a blue key and a stamina potion.")
+            # Add blue key and stamina potion to inventory here
+            room2()
+        case "2":
+            methods.scroll_text("You back away slowly and leave the mess hall.")
+            room2()
+        case _:
+            methods.scroll_text("You hesitate, unsure of what to do.")
+            room2()
+    # combat.battle_menu()
+    # time.sleep(2)
+
+def armory():
+    methods.clear_screen()
+    methods.scroll_text("You enter the Armory. You find a goblin trying on different pieces of armor.")
+    
+    choice = methods.ask_fixed_bottom(
+        "what will you do?",
+        ["1", "2", "3"],
+        [
+            "you have two options",
+            "1. Attack the goblin",
+            "2. Leave",
+        ],
+    )
+    match choice:
+        case "1":
+            combat.battle_menu()
+            time.sleep(2)
+            methods.scroll_text("You defeated the goblin! You found 5 swords.")
+            room2()
+        case "2":
+            methods.scroll_text("You back away slowly and leave the mess hall.")
+            room2()
+        case _:
+            methods.scroll_text("You hesitate, unsure of what to do.")
+            room2()
+
+# def hallway():
+#     methods.clear_screen()
+#     methods.scroll_text("You enter the Armory. You find a goblin trying on different pieces of armor.")
+#     combat.battle_menu()
+#     time.sleep(2)
+
+def closet():
+    methods.clear_screen()
+    methods.scroll_text("You enter The Forgemaster's Vault. You find a goblin trying on different pieces of armor.")
+    #Puzzle room...
+    time.sleep(1.5)
+    room3()
+
+def warChest():
+    methods.clear_screen()
+    methods.scroll_text("You enter the War Chest room. You find a goblin cleaning his sword.")
+    
+    choice = methods.ask_fixed_bottom(
+        "what will you do?",
+        ["1", "2", "3"],
+        [
+            "you have two options",
+            "1. Attack the goblin",
+            "2. Leave",
+        ],
+    )
+    match choice:
+        case "1":
+            combat.battle_menu()
+            time.sleep(2)
+            methods.scroll_text("You defeated the goblin! You found 5 swords.")
+            room3()
+        case "2":
+            methods.scroll_text("You back away slowly and leave the mess hall.")
+            room3()
+        case _:
+            methods.scroll_text("You hesitate, unsure of what to do.")
+            room3()
+
+def lab():
+    methods.clear_screen()
+    methods.scroll_text("As you enter the alchemy lab, you find a bunch of documents explaining how to make a stamina potion.")
+    # + Stamina 
+    time.sleep(1.5)
+    room3()
+
+def bladeVault():
+    methods.clear_screen()
+    methods.scroll_text("You enter the blade vault room. You find a goblin cleaning his sword.")
+    
+    choice = methods.ask_fixed_bottom(
+        "what will you do?",
+        ["1", "2", "3"],
+        [
+            "you have two options",
+            "1. Attack the goblin",
+            "2. Leave",
+        ],
+    )
+    match choice:
+        case "1":
+            combat.battle_menu()
+            time.sleep(2)
+            methods.scroll_text("You defeated the goblin! You found 5 swords.")
+            room4()
+        case "2":
+            methods.scroll_text("You back away slowly and leave the mess hall.")
+            room4()
+        case _:
+            methods.scroll_text("You hesitate, unsure of what to do.")
+            room4()
+
+def archeryRange():
+    methods.clear_screen()
+    methods.scroll_text("You enter the archery range. You find a goblin restringing his bow.")
+    
+    choice = methods.ask_fixed_bottom(
+        "what will you do?",
+        ["1", "2", "3"],
+        [
+            "you have two options",
+            "1. Attack the goblin",
+            "2. Leave",
+        ],
+    )
+    match choice:
+        case "1":
+            combat.battle_menu()
+            time.sleep(2)
+            methods.scroll_text("You defeated the goblin! You take his bow.")
+            room4()
+        case "2":
+            methods.scroll_text("You back away slowly and leave the archery range.")
+            room4()
+        case _:
+            methods.scroll_text("You hesitate, unsure of what to do.")
+            room4()
 
 def game_init():
     methods.scroll_text("\033[1;31mFate: the crimson isle\033[0;0m\n")
