@@ -33,3 +33,9 @@ jobs:
         with:
           name: output - ${{matrix.os}}
           path: build/*.bin
+          
+      - name: Uploading artifact (Windows)
+        uses: actions/upload-artifact@v7
+        with:
+          name: output - ${{matrix.os}}
+          path: build\*.exe
