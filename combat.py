@@ -4,6 +4,7 @@ import constants
 import values
 import time
 
+from fate_crimson_isle import end3
 
 monster = "Goblin"
 
@@ -147,18 +148,10 @@ def sword_fighting():
     # No swords left
     else:
         print(constants.blocker)
+        print(constants.sword_no_sword_wear)
+        end3()
 
-        time.sleep(0.5)
-        methods.scroll_text("Your fate is cruel.")
-        time.sleep(1)
-        methods.scroll_text("A misstep. A moment of hesitation.")
-        time.sleep(1)
-
-        if values.potion_num < 5:
-            methods.scroll_text("You had " + str(values.potion_num) + " potions left... you just never got the chance to use them.")
-            time.sleep(1)
-
-        methods.scroll_text("GAME OVER. You were the right warrior. Just the wrong moment.")
+        
 
 
 # Bow fighting, initiated from battle_fight()
@@ -193,7 +186,7 @@ def bow_fighting():
             print(constants.blocker)
             print(constants.bow_arrow_used_up)
             time.sleep(0.5)
-            battle_fight()
+            end3()
 
     # No bow
     else:
