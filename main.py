@@ -649,7 +649,7 @@ def game_init():
     time.sleep(1.5)
     methods.clear_screen()
     time.sleep(1)
-    play_music("your_music.mp3")
+    play_music("F4T3.mp3")
 
 if __name__ == "__main__":
     title_screen()
