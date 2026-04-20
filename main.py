@@ -8,10 +8,10 @@ import values
 
 # setup screen
 screen = turtle.Screen()
-screen.setup(width=800, height=600)
+screen.setup(width=600, height=400)
 screen.bgcolor("black")
 screen.title("Fate: the crimson isle")
-screen.setup(width=600, height=400, startx=-1, starty=0)
+screen.setup(width=600, height=600, startx=-1, starty=0)
 screen.cv._rootwindow.attributes("-topmost", True)
 screen.cv._rootwindow.resizable(False, False)
 screen.cv._rootwindow.overrideredirect(True)
@@ -86,20 +86,24 @@ def drawMapL1():
      +-----+------+        +    ----+
      |                            |
      |                            |
+     |                            |
 +----+    +  --------------+      |
+|         |                |      |
 |         |                |      |
 |    |    |         +------+      |
 +----+    +---------+      |      +-------+
 |         |         |      |      |       |
+|         |         |      |      |       |
 |    |    |         |      |      +-------+
 +----+----+  --------------+      |       |
+|                                         |
 |                                         |
 |                                 +-------+
 +-------------------+   ---------+
                     |            |
                     +------------+
 """
-    parse_map(map_str, cell_size=18)
+    return parse_map(map_str)
 
 def drawMapL2():
 
@@ -123,34 +127,37 @@ def drawMapL2():
     |                            |
     +----------------------------+
 """
-    parse_map(map_str, cell_size=18)
+    return parse_map(map_str)
 
-def parse_map(map_str, cell_size=20):
+def parse_map(map_str, padding=40):
     lines = map_str.strip('\n').split('\n')
-    
     max_width = max(len(line) for line in lines)
-
     lines = [line.ljust(max_width) for line in lines]
-    
     rows = len(lines)
     cols = max_width
+
+    # Auto-calculate cell_size to fit within the screen with padding
+    usable_width = 600 - padding * 2
+    usable_height = 600 - padding * 2
+    cell_size = min(usable_width // cols, usable_height // rows)
+    cell_size = max(cell_size, 4)  # never go below 4px
 
     start_x = -(cols * cell_size) // 2
     start_y = (rows * cell_size) // 2
 
     pen = turtle.Turtle()
-    pen.pensize(2)
+    pen.pensize(1)
     pen.hideturtle()
     pen.speed(0)
     pen.penup()
     pen.color("white")
+    screen.tracer(0)  # disable animation for instant draw
 
     # Draw horizontal walls (-)
     for r, line in enumerate(lines):
         c = 0
         while c < len(line):
             if line[c] == '-':
-                # Find run length
                 start = c
                 while c < len(line) and line[c] == '-':
                     c += 1
@@ -191,14 +198,17 @@ def parse_map(map_str, cell_size=20):
                 pen.goto(x, y)
                 pen.dot(4, "white")
 
+    screen.tracer(1)
     screen.update()
 
-    
+    return cell_size, start_x, start_y
+
 def room1():
     drawMapL1()
     knight = turtle.Turtle()
     methods.setup_knight(knight)
-    knight.goto(105, 98)
+    #knight.goto(105, 98)
+    knight.goto(-50, 50)
 
     methods.scroll_text("As you enter the dark hall, you hear chattering from all around you.")
     time.sleep(1.5)
@@ -356,8 +366,7 @@ def L2room2():
         case "2":
             L2()
 
-# le bron james
-# le bron
+
 #------------------------ ROOMS -------------------------------------------------------------------------------------------------------------
 def hm():
     methods.clear_screen()
