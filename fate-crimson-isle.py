@@ -391,7 +391,11 @@ def L2room2(knight):
         [
             "You have two options",
             "1. Explore the Quiver Room",
+<<<<<<< Updated upstream
             "2. Explore into a staircase.",
+=======
+            "2. Explore into the Rune Room.",
+>>>>>>> Stashed changes
         ],
     )
 
@@ -400,7 +404,7 @@ def L2room2(knight):
             # TODO: This is broken, you can't just go back to level 1
             quiverRoom()
         case "2":
-            ()
+            runeRoom()
 
 def boss_fight(knight):
     knight.goto(150, 140)
@@ -628,10 +632,24 @@ def quiverRoom(knight):
     values.arrow_amount = values.arrow_amount + 2 * constants.ARROW_GAIN
     boss_fight()
 
+def runeRoom(knight):
+    knight.goto(-80, -55)
+    methods.clear_screen()
+    methods.scroll_text("As you enter the alchemy lab, you find a bunch of documents explaining how to make a stamina potion.")
+    # + Potion
+    values.potion_num += 1
+    methods.scroll_text("You have " + str(values.potion_num) + " potions left!")
+    time.sleep(1.5)
 
 def kingsHoard(knight):
     knight.goto(-80, -55)
-
+    methods.clear_screen()
+    methods.scroll_text("You enter the Quiver Room. You find a crossbow")
+    values.have_crossbow = True
+    values.arrow_amount = values.arrow_amount + 2 * constants.ARROW_GAIN
+    boss_fight()
+    
+#------------------------------------- ENDINGs ----------------------------------------------------------------------------------------
 def end1():
     methods.scroll_text("")
 
@@ -644,7 +662,7 @@ def endLEBRON():
 def win1():
     methods.scroll_text("")
 
-
+#-------------------------------------GAME START----------------------------------------------------------------------------------------
 def game_init():
     console.Console().print("Fate: The Crimson Isle", style="red")
     time.sleep(2)
