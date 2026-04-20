@@ -310,7 +310,7 @@ def room3(knight):
             elixirVault(knight)
             room4(knight)
         case "2":
-            bladeVault()
+            bladeVault(knight)
             room4(knight)
         case "le bron":
             methods.clear_screen()
@@ -333,7 +333,7 @@ def room4(knight):
 
     match choice:
         case "1":
-            archeryRange()
+            archeryRange(knight)
             L2()
         case "2":
             L2()
@@ -397,7 +397,7 @@ def L2room2(knight):
         case "1":
             # TODO: This is broken, you can't just go back to level 1
             # also, the game currently ends here, we have to design the final boss
-            archeryRange()
+            archeryRange(knight)
             #room4(knight)
         case "2":
             L2()
@@ -538,7 +538,8 @@ def bladeVault(knight):
             methods.scroll_text("You back away slowly and leave the mess hall.")
 
 
-def archeryRange():
+def archeryRange(knight):
+    knight.goto(-80, -55)
     methods.clear_screen()
     methods.scroll_text("You enter the archery range. You find a goblin restringing his bow.")
     
