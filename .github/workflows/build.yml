@@ -37,11 +37,5 @@ jobs:
       - name: Uploading artifact
         uses: actions/upload-artifact@v7
         with:
-          name: output - ${{matrix.os}}
-          path: build/fate-crimson-isle
-          
-      - name: Uploading artifact (Windows)
-        uses: actions/upload-artifact@v7
-        with:
-          name: output - ${{matrix.os}}
-          path: build\*.exe
+          name: Game Executable - ${{matrix.os}}
+          path: ${{ matrix.os == 'windows-latest' && 'build\*.exe' || 'build/fate-crimson-isle' }}
