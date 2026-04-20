@@ -420,14 +420,11 @@ def boss_fight(knight):
         case "1":
             # TODO: This is broken, you can't just go back to level 1
             # also, the game currently ends here, we have to design the final boss
-<<<<<<< Updated upstream
-            archeryRange(knight)
-=======
             quiverRoom()
->>>>>>> Stashed changes
+
             #room4(knight)
         case "2":
-            L2()
+            kingsHoard()
 
 #------------------------ ROOMS -------------------------------------------------------------------------------------------------------------
 def hm(knight):
@@ -590,7 +587,8 @@ def archeryRange(knight):
         case "2":
             methods.scroll_text("You back away slowly and leave the archery range.")
 
-def Herbalist():
+def Herbalist(knight):
+    knight.goto(-80, -55)
     methods.clear_screen()
     methods.scroll_text("As you enter the alchemy lab, you find a bunch of documents explaining how to make a stamina potion.")
     # + Potion
@@ -598,7 +596,8 @@ def Herbalist():
     methods.scroll_text("You have " + str(values.potion_num) + " potions left!")
     time.sleep(1.5)
 
-def Forgemaster():
+def Forgemaster(knight):
+    knight.goto(-80, -55)
     methods.clear_screen()
     methods.scroll_text("You enter the blade vault room. You find a goblin cleaning his sword.")
     
@@ -621,20 +620,22 @@ def Forgemaster():
         case "2":
             methods.scroll_text("You back away slowly and leave the mess hall.")
 
-def quiverRoom():
+def quiverRoom(knight):
+    knight.goto(-80, -55)
     methods.clear_screen()
     methods.scroll_text("You enter the Quiver Room. You find a crossbow")
     values.have_crossbow = True
     values.arrow_amount = values.arrow_amount + 2 * constants.ARROW_GAIN
     boss_fight()
 
+
+def kingsHoard(knight):
+    knight.goto(-80, -55)
+
 def end1():
     methods.scroll_text("")
 
 def end2():
-    methods.scroll_text("")
-
-def end3():
     methods.scroll_text("")
 
 def endLEBRON():
@@ -683,35 +684,3 @@ def game_init():
 
 if __name__ == "__main__":
     title_screen()
-
-<<<<<<< Updated upstream
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> Stashed changes
-#67
