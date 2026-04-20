@@ -16,7 +16,7 @@ import pygame
 screen = turtle.Screen()
 screen.setup(width=600, height=400)
 screen.bgcolor("black")
-screen.title("Fate: the crimson isle")
+screen.title("Fate: The Crimson Isle")
 screen.setup(width=600, height=600, startx=-1, starty=0)
 screen.cv._rootwindow.attributes("-topmost", True)
 screen.cv._rootwindow.resizable(False, False)
@@ -44,7 +44,7 @@ def title_screen():
 
     # start instruction
     title.goto(0, -100)
-    title.write("click anywhere to begin", align="center", font=("arial", 16, "bold"))
+    title.write("Click anywhere to begin", align="center", font=("arial", 16, "bold"))
 
     #decorative line
     title.goto(-200, 10)
@@ -56,8 +56,8 @@ def title_screen():
 
     screen.update()
 
-    parser = argparse.ArgumentParser(description="Fate: the crimson isle")
-    parser.add_argument("-s", "--skip", action="store_true", help="skip game" )
+    parser = argparse.ArgumentParser(description="Fate: The Crimson Isle")
+    parser.add_argument("-s", "--skip", action="store_true", help="Skip Game" )
 
     # click to exit
     def start_game(x, y):
@@ -80,11 +80,11 @@ def continueOnTerminal():
     title.write("Fate", align="center", font=("courier", 48, "bold"))
 
     title.goto(0, 30)
-    title.write("the crimson isle", align="center", font=("courier", 24, "normal"))
+    title.write("The Crimson Isle", align="center", font=("courier", 24, "normal"))
 
     title.color("white")
     title.goto(0, -40)
-    title.write("continue on terminal", align="center", font=("arial", 14, "italic"))
+    title.write("Continue on terminal", align="center", font=("arial", 14, "italic"))
     screen.update()
 
 def play_music(filepath: str):
@@ -243,7 +243,7 @@ def room1():
         "what will you do?",
         ["1", "2", "3"],
         [
-            "you have three options",
+            "You have three options",
             "1. Enter the mess hall",
             "2. Enter the armory",
             "3. Continue exploring",
@@ -267,16 +267,16 @@ def room1():
 def room2(knight):
     knight.goto(110, 130)
     methods.clear_screen()
-    methods.scroll_text("You turn to a new hallway, and the first thing you see is a left door, and two doors at the end, hinting at a mystery.")
+    methods.scroll_text("You turn to a new hallway. The first thing you see is a door on your left, and then two doors at the end, hinting at a mystery.")
 
     choice = methods.ask_fixed_bottom(
         "what will you do?",
         ["1", "2", "3"],
         [
-            "you have three options",
-            "1. venture into the left door",
-            "2. explore the War Chest room",
-            "3. enter the Alchemy Lab",
+            "You have three options",
+            "1. Venture through the left door",
+            "2. Explore the War Chest room",
+            "3. Enter the Alchemy Lab",
         ],
     )
 
@@ -294,15 +294,15 @@ def room2(knight):
 def room3(knight):
     methods.clear_screen()
     knight.goto(110, -70)
-    methods.scroll_text("As you turn, the next hallway reveals only two doors: The Elixir Vault and a blade vault.")
+    methods.scroll_text("As you turn, the next hallway reveals only two doors: The Elixir Vault and a Blade Vault.")
 
     choice = methods.ask_fixed_bottom(
         "what will you do?",
         ["1", "2"],
         [
             "You have two options",
-            "1. explore The Elixir Vault",
-            "2. venture into the blade vault",
+            "1. Explore the Elixir Vault",
+            "2. Venture into the Blade vault",
         ],
     )
 
@@ -315,19 +315,19 @@ def room3(knight):
             room4(knight)
         case "le bron":
             methods.clear_screen()
-            methods.scroll_text("you seek the wisdom of the king le bron james")
+            methods.scroll_text("You seek the wisdom of the King LeBron James")
 
 # TODO: Update gotos
 def room4(knight):
     knight.goto(-40, -145)
-    methods.scroll_text("As you turn, the next hallway reveals only two doors: an archery range and a blade vault.")
+    methods.scroll_text("As you turn, the next hallway reveals only two doors: an Archery Range and a staircase delving deeper into the castle.")
 
     choice = methods.ask_fixed_bottom(
         "what will you do?",
         ["1", "2"],
         [
-            "you have two options",
-            "1. explore the archery range",
+            "You have two options",
+            "1. Explore the archery range",
             "2. Explore into a staircase.",
         ],
     )
@@ -355,7 +355,7 @@ def L2():
         "what will you do?",
         ["1", "2", "3"],
         [
-            "you have three options",
+            "You have three options",
             "1. Enter the Herbalist's Den",
             "2. Enter the The Forgemaster's Vault",
             "3. Continue exploring",
@@ -389,8 +389,8 @@ def L2room2(knight):
         "what will you do?",
         ["1", "2"],
         [
-            "you have two options",
-            "1. explore the Quiver Room",
+            "You have two options",
+            "1. Explore the Quiver Room",
             "2. Explore into a staircase.",
         ],
     )
@@ -410,8 +410,8 @@ def boss_fight(knight):
         "what will you do?",
         ["1", "2"],
         [
-            "you have two options",
-            "1. explore the Quiver Room",
+            "You have two options",
+            "1. Explore the Quiver Room",
             "2. Explore into a staircase.",
         ],
     )
@@ -430,13 +430,13 @@ def boss_fight(knight):
 def hm(knight):
     knight.goto(0, 120)
     methods.clear_screen()
-    methods.scroll_text("you enter into the mess hall, where you encounter Goblin eating pizza.")
+    methods.scroll_text("You enter into the mess hall, where you encounter a Goblin eating pizza.")
 
     choice = methods.ask_fixed_bottom(
         "what will you do?",
         ["1", "2"],
         [
-            "you have two options",
+            "You have two options",
             "1. Attack the goblin",
             "2. Continue exploring",
         ],
@@ -465,7 +465,7 @@ def armory(knight):
         "what will you do?",
         ["1", "2"],
         [
-            "you have two options",
+            "You have two options",
             "1. Attack the goblin",
             "2. Leave",
         ],
@@ -476,9 +476,9 @@ def armory(knight):
             time.sleep(2)
             methods.scroll_text("You defeated the goblin! You found 3 swords.\n")
             values.sword_amount += constants.SWORDS_GAIN
-            methods.scroll_text("You Have " + str(values.sword_amount) + " swords left!")
+            methods.scroll_text("You have " + str(values.sword_amount) + " swords left!")
         case "2":
-            methods.scroll_text("You back away slowly and leave the mess hall.")
+            methods.scroll_text("You back away slowly and leave the armory.")
 
 # def hallway():
 #     methods.clear_screen()
@@ -501,7 +501,7 @@ def warChest(knight):
         "what will you do?",
         ["1", "2"],
         [
-            "you have two options",
+            "You have two options",
             "1. Attack the goblin",
             "2. Leave",
         ],
@@ -513,9 +513,9 @@ def warChest(knight):
             methods.scroll_text("You defeated the goblin! You found 3 swords.")
 
             values.sword_amount += constants.SWORDS_GAIN
-            methods.scroll_text("You Have " + str(values.sword_amount) + " swords left!")
+            methods.scroll_text("You have " + str(values.sword_amount) + " swords left!")
         case "2":
-            methods.scroll_text("You backed away slowly and left the mess hall.")
+            methods.scroll_text("You backed away slowly and left the war chest room.")
 
 
 def lab():
@@ -529,7 +529,7 @@ def lab():
 def elixirVault(knight):
     knight.goto(190, -120)
     methods.clear_screen()
-    methods.scroll_text("As you enter The Elixir Vault, you find a bunch potions lying around and you took two of them.")
+    methods.scroll_text("As you enter The Elixir Vault, you find a bunch potions lying around. You take two of them.")
     # + Potion
     values.potion_num += 2
     methods.scroll_text("You have " + str(values.potion_num) + " potions left!")
@@ -538,13 +538,13 @@ def elixirVault(knight):
 def bladeVault(knight):
     knight.goto(20, -50)
     methods.clear_screen()
-    methods.scroll_text("You enter the blade vault room. You find a goblin cleaning his sword.")
+    methods.scroll_text("You enter the blade vault. You find a goblin cleaning his sword.")
     
     choice = methods.ask_fixed_bottom(
         "what will you do?",
         ["1", "2"],
         [
-            "you have two options",
+            "You have two options",
             "1. Attack the goblin",
             "2. Leave",
         ],
@@ -556,9 +556,9 @@ def bladeVault(knight):
             methods.scroll_text("You defeated the goblin! You found 3 swords.")
 
             values.sword_amount += constants.SWORDS_GAIN
-            methods.scroll_text("You Have " + str(values.sword_amount) + " swords left!")
+            methods.scroll_text("You have " + str(values.sword_amount) + " swords left!")
         case "2":
-            methods.scroll_text("You back away slowly and leave the mess hall.")
+            methods.scroll_text("You back away slowly and leave the blade vault.")
 
 
 def archeryRange(knight):
@@ -570,7 +570,7 @@ def archeryRange(knight):
         "what will you do?",
         ["1", "2"],
         [
-            "you have two options",
+            "You have two options",
             "1. Attack the goblin",
             "2. Leave",
         ],
@@ -583,7 +583,7 @@ def archeryRange(knight):
 
             values.have_bow = True 
             values.arrow_amount += constants.ARROW_GAIN
-            methods.scroll_text("You Have " + str(values.arrow_amount) + " arrows left!")
+            methods.scroll_text("You have " + str(values.arrow_amount) + " arrows left!")
         case "2":
             methods.scroll_text("You back away slowly and leave the archery range.")
 
@@ -599,7 +599,7 @@ def Herbalist(knight):
 def Forgemaster(knight):
     knight.goto(-80, -55)
     methods.clear_screen()
-    methods.scroll_text("You enter the blade vault room. You find a goblin cleaning his sword.")
+    methods.scroll_text("You enter the forgemaster's room. You find a goblin cleaning his sword.")
     
     choice = methods.ask_fixed_bottom(
         "what will you do?",
@@ -618,7 +618,7 @@ def Forgemaster(knight):
             values.sword_amount += constants.SWORDS_GAIN
             methods.scroll_text("You Have" + str(values.sword_amount) + " swords left!")
         case "2":
-            methods.scroll_text("You back away slowly and leave the mess hall.")
+            methods.scroll_text("You back away slowly and leave the forgemaster's room.")
 
 def quiverRoom(knight):
     knight.goto(-80, -55)
@@ -646,9 +646,9 @@ def win1():
 
 
 def game_init():
-    console.Console().print("Fate: the crimson isle", style="red")
+    console.Console().print("Fate: The Crimson Isle", style="red")
     time.sleep(2)
-    methods.scroll_text("You are a level 1 adventurer working for King Lebron inc., tasked with exploring the mysterious island, the Crimson Isle.\n")
+    methods.scroll_text("You are a level 1 adventurer working for King LeBron inc., tasked with exploring the mysterious island, the Crimson Isle.\n")
     time.sleep(1)
     methods.scroll_text("You land amidst the crashing waves, peering back at the approaching vessel. It carries a team of experienced adventurers, the ones that you are meant to shadow on this expedition.\n")
     time.sleep(1)
