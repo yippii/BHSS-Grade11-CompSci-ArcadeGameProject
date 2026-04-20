@@ -391,11 +391,7 @@ def L2room2(knight):
         [
             "You have two options",
             "1. Explore the Quiver Room",
-<<<<<<< Updated upstream
-            "2. Explore into a staircase.",
-=======
             "2. Explore into the Rune Room.",
->>>>>>> Stashed changes
         ],
     )
 
