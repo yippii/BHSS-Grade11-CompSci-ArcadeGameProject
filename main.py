@@ -136,14 +136,17 @@ def parse_map(map_str, padding=40):
     rows = len(lines)
     cols = max_width
 
-    # Auto-calculate cell_size to fit within the screen with padding
     usable_width = 600 - padding * 2
     usable_height = 600 - padding * 2
-    cell_size = min(usable_width // cols, usable_height // rows)
-    cell_size = max(cell_size, 4)  # never go below 4px
 
-    start_x = -(cols * cell_size) // 2
-    start_y = (rows * cell_size) // 2
+    # Separate horizontal and vertical cell sizes
+    cell_w = usable_width // cols
+    cell_h = usable_height // rows
+    cell_w = max(cell_w, 4)
+    cell_h = max(cell_h, 4)
+
+    start_x = -(cols * cell_w) // 2
+    start_y = (rows * cell_h) // 2
 
     pen = turtle.Turtle()
     pen.pensize(1)
@@ -151,7 +154,7 @@ def parse_map(map_str, padding=40):
     pen.speed(0)
     pen.penup()
     pen.color("white")
-    screen.tracer(0)  # disable animation for instant draw
+    screen.tracer(0)
 
     # Draw horizontal walls (-)
     for r, line in enumerate(lines):
@@ -161,9 +164,9 @@ def parse_map(map_str, padding=40):
                 start = c
                 while c < len(line) and line[c] == '-':
                     c += 1
-                length = (c - start) * cell_size
-                x = start_x + start * cell_size
-                y = start_y - r * cell_size
+                length = (c - start) * cell_w      # uses cell_w
+                x = start_x + start * cell_w
+                y = start_y - r * cell_h            # uses cell_h
                 pen.goto(x, y)
                 pen.pendown()
                 pen.goto(x + length, y)
@@ -179,9 +182,9 @@ def parse_map(map_str, padding=40):
                 start = r
                 while r < rows and c < len(lines[r]) and lines[r][c] == '|':
                     r += 1
-                length = (r - start) * cell_size
-                x = start_x + c * cell_size
-                y = start_y - start * cell_size
+                length = (r - start) * cell_h      # uses cell_h
+                x = start_x + c * cell_w
+                y = start_y - start * cell_h
                 pen.goto(x, y)
                 pen.pendown()
                 pen.goto(x, y - length)
@@ -193,22 +196,22 @@ def parse_map(map_str, padding=40):
     for r, line in enumerate(lines):
         for c, ch in enumerate(line):
             if ch == '+':
-                x = start_x + c * cell_size
-                y = start_y - r * cell_size
+                x = start_x + c * cell_w
+                y = start_y - r * cell_h
                 pen.goto(x, y)
                 pen.dot(4, "white")
 
     screen.tracer(1)
     screen.update()
 
-    return cell_size, start_x, start_y
+    return cell_w, cell_h, start_x, start_y
 
 def room1():
-    drawMapL1()
+    cell_w, cell_h, start_x, start_y = drawMapL1()
     knight = turtle.Turtle()
     methods.setup_knight(knight)
     #knight.goto(105, 98)
-    knight.goto(-50, 50)
+    knight.goto(start_x + 8 * cell_w, start_y - 10 * cell_h)
 
     methods.scroll_text("As you enter the dark hall, you hear chattering from all around you.")
     time.sleep(1.5)
@@ -313,10 +316,10 @@ def room4():
 
 def L2():
     methods.clear_screen()
-    drawMapL2()
+    cell_w, cell_h, start_x, start_y = drawMapL2()
     knight = turtle.Turtle()
     methods.setup_knight(knight)
-    knight.goto(105, 98)
+    knight.goto(start_x + 8 * cell_w, start_y - 10 * cell_h)
 
     methods.scroll_text("As you venture down into the dungeon, you reach the lowest level. You can hear the screams of the Necromancer's Experiments.")
     time.sleep(1.5)
