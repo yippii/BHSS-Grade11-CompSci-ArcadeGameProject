@@ -17,3 +17,6 @@ blue_key3 = False
 green_key1 = False
 green_key2 = False
 green_key3 = False
+
+
+room_cleared = 0

@@ -240,7 +240,7 @@ def room1():
 
     choice = methods.ask_fixed_bottom(
         "what will you do?",
-        ["1", "2", "3"],
+        ["1", "2", "3", "67"],
         [
             "You have three options",
             "1. Enter the mess hall",
@@ -261,10 +261,13 @@ def room1():
         case "3":
             methods.clear_screen()
             room2(knight)
+        case "67":
+            methods.clear_screen()
+            L2()
 
 # TODO: Update gotos
 def room2(knight):
-    knight.goto(110, 130)
+    knight.goto(-110, 130)
     methods.clear_screen()
     methods.scroll_text("You turn to a new hallway. The first thing you see is a door on your left, and then two doors at the end, hinting at a mystery.")
 
@@ -379,7 +382,7 @@ def L2():
 # TODO: Update gotos
 
 def L2room2(knight):
-    knight.goto(150, 140)
+    knight.goto(-130, 167)
     methods.scroll_text("The hallway continues, and you find yourself facing a doorway before you: a room pulsing with unsettling activity, and a faint, desperate scream suggesting something terrible is happening within.")
 
     choice = methods.ask_fixed_bottom(
@@ -388,63 +391,39 @@ def L2room2(knight):
         [
             "You have two options",
             "1. Explore the Quiver Room",
-            "2. Explore into the staircase.",
+            "2. Explore into Kings Hoard.",
         ],
     )
 
     match choice:
         case "1":
             quiverRoom(knight)
-        case "2":
-            kingsHoard(knight)
-
-def L2room3(knight):
-    knight.goto(150, 140)
-    methods.scroll_text("Dooming testament of Avril—you made it all the way here, but you will never take me down.")
-
-    choice = methods.ask_fixed_bottom(
-        "what will you do?",
-        ["1", "2"],
-        [
-            "You have two options",
-            "1. Explore the Quiver Room",
-            "2. Explore into a staircase.",
-        ],
-    )
-
-    match choice:
-        case "1":
-            # TODO: This is broken, you can't just go back to level 1
-            # also, the game currently ends here, we have to design the final boss
-            quiverRoom(knight)
-
-            #room4(knight)
         case "2":
             kingsHoard(knight)
 
 def boss_fight(knight):
-    knight.goto(150, 140)
+    knight.goto(-150, -140)
     methods.scroll_text("Dooming testament of Avril, You made it all the way here, but you will never take me down.")
 
-    choice = methods.ask_fixed_bottom(
-        "what will you do?",
-        ["1", "2"],
-        [
-            "You have two options",
-            "1. Explore the Quiver Room",
-            "2. Explore into a staircase.",
-        ],
-    )
+    # choice = methods.ask_fixed_bottom(
+    #     "what will you do?",
+    #     ["1", "2"],
+    #     [
+    #         "You have two options",
+    #         "1. Explore the Quiver Room",
+    #         "2. Explore into a staircase.",
+    #     ],
+    # )
 
-    match choice:
-        case "1":
-            # TODO: This is broken, you can't just go back to level 1
-            # also, the game currently ends here, we have to design the final boss
-            quiverRoom(knight)
+    # match choice:
+    #     case "1":
+    #         # TODO: This is broken, you can't just go back to level 1
+    #         # also, the game currently ends here, we have to design the final boss
+    #         quiverRoom(knight)
 
-            #room4(knight)
-        case "2":
-            kingsHoard(knight)
+    #         #room4(knight)
+    #     case "2":
+    #         kingsHoard(knight)
 
 
 #------------------------ ROOMS -------------------------------------------------------------------------------------------------------------
@@ -472,6 +451,8 @@ def hm(knight):
             values.blue_key1 = True
             values.potion_num += 1
             methods.scroll_text("You have "+ str(values.potion_num) + " potions left!")
+
+            values.room_cleared = values.room_cleared + 1
         case "2":
             methods.scroll_text("You back away slowly and leave the mess hall.")
     # combat.battle_menu()
@@ -498,20 +479,16 @@ def armory(knight):
             methods.scroll_text("You defeated the goblin! You found 3 swords.\n")
             values.sword_amount += constants.SWORDS_GAIN
             methods.scroll_text("You have " + str(values.sword_amount) + " swords left!")
+            values.room_cleared = values.room_cleared + 1
         case "2":
             methods.scroll_text("You back away slowly and leave the armory.")
-
-# def hallway():
-#     methods.clear_screen()
-#     methods.scroll_text("You enter the Armory. You find a goblin trying on different pieces of armor.")
-#     combat.battle_menu()
-#     time.sleep(2)
 
 def closet():
     methods.clear_screen()
     methods.scroll_text(".")
     #Puzzle room...
     time.sleep(1.5)
+    values.room_cleared = values.room_cleared + 1
 
 def warChest(knight):
     knight.goto(190, -50)
@@ -535,6 +512,8 @@ def warChest(knight):
 
             values.sword_amount += constants.SWORDS_GAIN
             methods.scroll_text("You have " + str(values.sword_amount) + " swords left!")
+
+            values.room_cleared = values.room_cleared + 1
         case "2":
             methods.scroll_text("You backed away slowly and left the war chest room.")
 
@@ -546,6 +525,7 @@ def lab():
     values.potion_num += 1
     methods.scroll_text("You have " + str(values.potion_num) + " potions left!")
     time.sleep(1.5)
+    values.room_cleared = values.room_cleared + 1
 
 def elixirVault(knight):
     knight.goto(190, -120)
@@ -555,6 +535,7 @@ def elixirVault(knight):
     values.potion_num += 2
     methods.scroll_text("You have " + str(values.potion_num) + " potions left!")
     time.sleep(1.5)
+    values.room_cleared = values.room_cleared + 1
 
 def bladeVault(knight):
     knight.goto(20, -50)
@@ -578,6 +559,7 @@ def bladeVault(knight):
 
             values.sword_amount += constants.SWORDS_GAIN
             methods.scroll_text("You have " + str(values.sword_amount) + " swords left!")
+            values.room_cleared = values.room_cleared + 1
         case "2":
             methods.scroll_text("You back away slowly and leave the blade vault.")
 
@@ -586,6 +568,7 @@ def archeryRange(knight):
     knight.goto(-80, -55)
     methods.clear_screen()
     methods.scroll_text("You enter the archery range. You find a goblin restringing his bow.")
+    
     
     choice = methods.ask_fixed_bottom(
         "what will you do?",
@@ -601,6 +584,7 @@ def archeryRange(knight):
             combat.battle_menu()
             time.sleep(2)
             methods.scroll_text("You defeated the goblin! You took his bow.")
+            values.room_cleared = values.room_cleared + 1
 
             values.have_bow = True 
             values.arrow_amount += constants.ARROW_GAIN
@@ -609,16 +593,17 @@ def archeryRange(knight):
             methods.scroll_text("You back away slowly and leave the archery range.")
 
 def Herbalist(knight):
-    knight.goto(-80, -55)
+    knight.goto(67, 50)
     methods.clear_screen()
     methods.scroll_text("As you enter the alchemy lab, you find a bunch of documents explaining how to make a stamina potion.")
     # + Potion
     values.potion_num += 1
     methods.scroll_text("You have " + str(values.potion_num) + " potions left!")
     time.sleep(1.5)
+    values.room_cleared = values.room_cleared + 1
 
 def Forgemaster(knight):
-    knight.goto(-80, -55)
+    knight.goto(150, 50)
     methods.clear_screen()
     methods.scroll_text("You enter the forgemaster's room. You find a goblin cleaning his sword.")
     
@@ -638,25 +623,28 @@ def Forgemaster(knight):
             methods.scroll_text("You defeated the goblin! You found 3 swords.")
             values.sword_amount += constants.SWORDS_GAIN
             methods.scroll_text("You Have" + str(values.sword_amount) + " swords left!")
+            values.room_cleared = values.room_cleared + 1
         case "2":
             methods.scroll_text("You back away slowly and leave the forgemaster's room.")
 
 def quiverRoom(knight):
-    knight.goto(-80, -55)
+    knight.goto(-170, -25)
     methods.clear_screen()
     methods.scroll_text("You enter the Quiver Room. You find a crossbow")
     values.have_crossbow = True
     values.arrow_amount = values.arrow_amount + 2 * constants.ARROW_GAIN
-    L2room3(knight)
+    values.room_cleared = values.room_cleared + 1
+    boss_fight(knight)
 
 
 def kingsHoard(knight):
-    knight.goto(-80, -55)
+    knight.goto(-100, -25)
     methods.clear_screen()
     methods.scroll_text("You enter the Quiver Room. You find a crossbow")
     values.have_crossbow = True
     values.arrow_amount = values.arrow_amount + 2 * constants.ARROW_GAIN
-    L2room3(knight)
+    values.room_cleared = values.room_cleared + 1
+    boss_fight(knight)
 
 #------------------------------------- ENDINGS ----------------------------------------------------------------------------------------
 def end1():
