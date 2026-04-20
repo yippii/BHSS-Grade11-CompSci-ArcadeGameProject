@@ -325,10 +325,11 @@ def room4(knight):
     match choice:
         case "1":
             archeryRange()
+            L2()
         case "2":
-            L2(knight)
+            L2()
 
-def L2(knight):
+def L2():
     methods.clear_screen()
     methods.clear_gui(screen)
     knightL2 = turtle.Turtle()
