@@ -2,6 +2,7 @@ import time
 import turtle
 import argparse
 import rich.console as console
+import sys
 
 import combat
 import methods
@@ -410,7 +411,7 @@ def boss_fight(knight):
 #------------------------ ROOMS -------------------------------------------------------------------------------------------------------------
 
 def hm(knight):
-    knight.goto(0, 120)
+    knight.goto(0, 90)
     methods.clear_screen()
     methods.scroll_text("You enter into the mess hall, where you encounter a Goblin eating pizza.")
 
@@ -653,6 +654,7 @@ def end1():
     methods.scroll_text("Rooms cleared: " + str(values.room_cleared) + " — So close, yet so far.")
     time.sleep(1)
     methods.scroll_text("GAME OVER. The Crimson Isle claims another soul.")
+    sys.exit()
 
 
 def end2():
@@ -669,6 +671,7 @@ def end2():
         time.sleep(1)
 
     methods.scroll_text("GAME OVER. You were the right warrior. Just the wrong moment.")
+    sys.exit()
 
 def end3():
 
@@ -682,6 +685,7 @@ def end3():
         time.sleep(1)
 
     methods.scroll_text("GAME OVER. You were the right warrior. Just the wrong moment.")
+    sys.exit()
 
 
 def endLEBRON():
@@ -710,6 +714,7 @@ def endLEBRON():
         methods.scroll_text("'Only " + str(values.room_cleared) + " rooms? You're on probation.'")
         time.sleep(1)
         methods.scroll_text("ENDING: THE LEBRON CHRONICLES. You get a participation trophy and a mediocre benefits package.")
+        sys.exit()
 
 
 def win1():
@@ -763,6 +768,7 @@ def win1():
     methods.scroll_text("Swords: " + str(values.sword_amount) + "  |  Arrows: " + str(values.arrow_amount) + "  |  Rooms cleared: " + str(values.room_cleared))
     time.sleep(1)
     methods.scroll_text("YOU WIN. The legend of the Crimson Isle will be told for generations.")
+    sys.exit()
 
 #-------------------------------------GAME START----------------------------------------------------------------------------------------
 def game_init():
