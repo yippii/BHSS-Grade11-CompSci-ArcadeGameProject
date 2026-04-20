@@ -18,7 +18,7 @@ def battle_menu():
         [
             "1 - Attack",
             "2 - Inventory",
-            "3 - Hide"
+            "3 - Flee"
         ]
     )
 
@@ -30,7 +30,7 @@ def battle_menu():
         battle_flee()
 
 
-# Post-battle report, initiated from sword_fighting() and bow_fighting()
+# Post-battle report, initiated from sword_fighting(), bow_fighting() and crossbow_fighting()
 def battle_ending(mode, missed):
     # Sword
     print()
@@ -50,6 +50,11 @@ def battle_ending(mode, missed):
         print(constants.blocker)
         time.sleep(0.5)
 
+    #Crossbow
+    elif mode == 3:
+        print(f"Stamina left: {values.stamina}\nArrows left: {values.arrow_amount}")
+        print(constants.blocker)
+        time.sleep(0.5)
 
 # Check if weapon is owned, if not, make it "???"
 def weapon_checker():
@@ -94,9 +99,7 @@ def battle_fight():
     elif choice == "2":
         bow_fighting()
     elif choice == "3":
-        # TODO: Add crossbow
-        # crossbow_fighting(stamina, have_crossbow)
-        battle_menu()
+        crossbow_fighting()
     elif choice == "5":
         battle_menu()
 
@@ -195,6 +198,45 @@ def bow_fighting():
         time.sleep(0.5)
         battle_fight()
 
+def crossbow_fighting():
+    methods.clear_screen()
+    if values.have_crossbow:
+        if values.arrow_amount >= 1:
+            print(constants.blocker)
+            print("You used your crossbow!")
+
+            crossbow_battle_roll = r.randint(1,6)
+
+            # Missed
+            if crossbow_battle_roll <= 2:
+                print(constants.missed)
+                print(constants.stamina_lost3)
+                print(constants.bow_arrow_used)
+                values.stamina -= 3
+                values.arrow_amount -= 1
+                battle_ending(3, True)
+
+            # Perfect hit
+            else:
+                print(constants.perfect_hit)
+                print(constants.stamina_lost0)
+                print(constants.bow_arrow_used)
+                values.arrow_amount -= 1
+                battle_ending(3, False)
+
+        # No arrows
+        else:
+            print(constants.blocker)
+            print(constants.bow_arrow_used_up)
+            time.sleep(0.5)
+            battle_fight()
+
+    # No crossbow
+    else:
+        print(constants.blocker)
+        print(constants.no_weapon)
+        time.sleep(0.5)
+        battle_fight()
 
 # Inventory system, initiated from battle_menu()
 def battle_inventory():
