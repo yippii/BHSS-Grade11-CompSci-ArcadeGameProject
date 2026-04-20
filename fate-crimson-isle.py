@@ -240,7 +240,7 @@ def room1():
 
     choice = methods.ask_fixed_bottom(
         "what will you do?",
-        ["1", "2", "3", "67"],
+        ["1", "2", "3"],
         [
             "You have three options",
             "1. Enter the mess hall",
@@ -261,9 +261,6 @@ def room1():
         case "3":
             methods.clear_screen()
             room2(knight)
-        case "67":
-            methods.clear_screen()
-            L2()
 
 # TODO: Update gotos
 def room2(knight):
@@ -318,6 +315,8 @@ def room3(knight):
         case "le bron":
             methods.clear_screen()
             methods.scroll_text("You seek the wisdom of the King LeBron James")
+            endLEBRON()
+            
 
 # TODO: Update gotos
 def room4(knight):
@@ -404,29 +403,16 @@ def L2room2(knight):
 def boss_fight(knight):
     knight.goto(-150, -140)
     methods.scroll_text("Dooming testament of Avril, You made it all the way here, but you will never take me down.")
+    methods.scroll_text("Let the games begin")
+    methods.scroll_text("HAHAHAHA")
 
-    # choice = methods.ask_fixed_bottom(
-    #     "what will you do?",
-    #     ["1", "2"],
-    #     [
-    #         "You have two options",
-    #         "1. Explore the Quiver Room",
-    #         "2. Explore into a staircase.",
-    #     ],
-    # )
-
-    # match choice:
-    #     case "1":
-    #         # TODO: This is broken, you can't just go back to level 1
-    #         # also, the game currently ends here, we have to design the final boss
-    #         quiverRoom(knight)
-
-    #         #room4(knight)
-    #     case "2":
-    #         kingsHoard(knight)
-
+    if(values.kingsHoard_ROOM == False):
+        win1()
+    elif(values.kingsHoard_ROOM == True):
+        end2()
 
 #------------------------ ROOMS -------------------------------------------------------------------------------------------------------------
+
 def hm(knight):
     knight.goto(0, 120)
     methods.clear_screen()
@@ -645,11 +631,11 @@ def kingsHoard(knight):
     values.have_crossbow = True
     values.arrow_amount = values.arrow_amount + 2 * constants.ARROW_GAIN
     values.room_cleared = values.room_cleared + 1
+    kingsHoard_ROOM = True
     boss_fight(knight)
 
 #------------------------------------- ENDINGS ----------------------------------------------------------------------------------------
 def end1():
-
 
     if values.have_bow or values.have_crossbow:
         methods.scroll_text("You raise your " + ("crossbow" if values.have_crossbow else "bow") + " and fire.")
@@ -674,27 +660,15 @@ def end1():
 
 
 def end2():
-    methods.scroll_text("You enter the boss chamber, armed and ready.")
-    time.sleep(1)
 
-    if values.have_crossbow:
-        methods.scroll_text("Your crossbow gleams. Your arrows are notched.")
-    elif values.have_bow:
-        methods.scroll_text("Your bow is drawn. You have " + str(values.arrow_amount) + " arrows left.")
-    else:
-        methods.scroll_text("Your sword is raised. You've cleared " + str(values.room_cleared) + " rooms to get here.")
-
-    time.sleep(1)
-    methods.scroll_text("The fight begins. You had everything you needed...")
-    time.sleep(1.5)
-    methods.scroll_text("But fate is cruel.")
+    methods.scroll_text("Your fate is cruel.")
     time.sleep(1)
     methods.scroll_text("A misstep. A moment of hesitation.")
     time.sleep(1)
     methods.scroll_text("The Necromancer seizes the opening and drives a cursed blade through your chest.")
     time.sleep(1.5)
 
-    if values.potion_num > 0:
+    if values.potion_num < 5:
         methods.scroll_text("You had " + str(values.potion_num) + " potions left... you just never got the chance to use them.")
         time.sleep(1)
 
@@ -730,12 +704,12 @@ def endLEBRON():
 
 
 def win1():
-    methods.scroll_text("You enter the final chamber.")
-    time.sleep(1)
-    methods.scroll_text("The Necromancer towers before you, wreathed in crimson flame.")
-    time.sleep(1)
-    methods.scroll_text("'You made it this far. Impressive. But it ends HERE.'")
-    time.sleep(1.5)
+    # methods.scroll_text("You enter the final chamber.")
+    # time.sleep(1)
+    # methods.scroll_text("The Necromancer towers before you, wreathed in crimson flame.")
+    # time.sleep(1)
+    # methods.scroll_text("'You made it this far. Impressive. But it ends HERE.'")
+    # time.sleep(1.5)
 
     if values.room_cleared >= 8:
         methods.scroll_text("But you are not the same adventurer who stepped off that boat.")
@@ -754,10 +728,14 @@ def win1():
         methods.scroll_text("You draw your bow and loose your last arrow.")
         time.sleep(1)
         methods.scroll_text("It strikes the Necromancer square in the chest, shattering his amulet.")
+        end2()
+
     else:
         methods.scroll_text("You charge, sword raised, screaming the names of your fallen teammates.")
         time.sleep(1)
         methods.scroll_text("Blade meets curse. The Necromancer did not expect sheer will.")
+
+        end2()
 
     time.sleep(1.5)
     methods.scroll_text("He collapses. The crimson light fades.")
