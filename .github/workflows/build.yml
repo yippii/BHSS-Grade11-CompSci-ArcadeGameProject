@@ -25,7 +25,7 @@ jobs:
           nuitka-version: main
           script-name: main.py
           mode: onefile
-          include-package: rich
+          include-package: rich pygame
           enable-plugins: tk-inter
           include-data-files: '*.mp3=F4T3.mp3'
           output-file: fate-crimson-isle
