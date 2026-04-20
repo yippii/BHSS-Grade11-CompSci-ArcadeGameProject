@@ -245,6 +245,7 @@ def room1():
         case "1":
             methods.clear_screen()
             hm()
+            room2(knight)
         case "2":
             methods.clear_screen()
             armory()
@@ -254,10 +255,9 @@ def room1():
             room2(knight)
 
 def room2(knight):
+    knight.goto(140, 170)
     methods.clear_screen()
     methods.scroll_text("You turn to a new hallway, and the first thing you see is a right door, a left door, and a door at the end, hinting at a mystery.")
-    methods.setup_knight(knight)
-    knight.goto(150, 140)
 
     choice = methods.ask_fixed_bottom(
         "what will you do?",
@@ -414,15 +414,11 @@ def hm():
             # Add blue key and stamina potion to inventory here
             values.blue_key1 = True
             values.potion_num += 1
-            methods.scroll_text("You have"+ str(values.potion_num) + "potions left!")
-            
-            room2()
+            methods.scroll_text("You have"+ str(values.potion_num) + " potions left!")
         case "2":
             methods.scroll_text("You back away slowly and leave the mess hall.")
-            room2()
         case _:
             methods.scroll_text("You hesitate, unsure of what to do.")
-            room2()
     # combat.battle_menu()
     # time.sleep(2)
 
@@ -502,7 +498,7 @@ def elixirVault():
     methods.scroll_text("As you enter the alchemy lab, you find a bunch of documents explaining how to make a stamina potion.")
     # + Potion
     values.potion_num += 1
-    methods.scroll_text("You have" + str(values.potion_num) + "potions left!")
+    methods.scroll_text("You have " + str(values.potion_num) + " potions left!")
     time.sleep(1.5)
 
 def bladeVault():
