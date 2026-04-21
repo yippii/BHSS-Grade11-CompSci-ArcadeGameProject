@@ -33,6 +33,9 @@ jobs:
           output-file: fate-crimson-isle
           enable-console: true
           macos-app-name: "Fate: Crimson Isle"
+          macos-app-icon: "FATE.icns"
+          windows-icon-from-ico: "FATE.ico"
+          linux-icon: "FATE.png"
           
       - name: Uploading artifact
         uses: actions/upload-artifact@v7
