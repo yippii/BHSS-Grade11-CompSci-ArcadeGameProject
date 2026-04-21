@@ -517,28 +517,31 @@ def armory(knight):
 def closet(knight):
     knight.goto(110, 200)
     methods.clear_screen()
-    riddle_question = " How many letters are in the alphabet?"
+    riddle_question = "How many letters are in the alphabet?"
     riddle = True
 
     methods.scroll_text("You find a locked chest with a riddle on it.")
     methods.scroll_text("You presume that you must solve the riddle to open the chest:")
     methods.scroll_text('(You can also give up by typing, "I give up")\n')
 
-    giving_up = input("Do you want to give up?\n: ")
-
     while riddle:
+        methods.clear_screen()
         methods.scroll_text(riddle_question)
         try:
-            riddle_guess = (input("  : "))
-        except:
+            riddle_guess = input("  : ")
             methods.scroll_text("\nThe chest remains stagnant.\n")
-        if riddle_guess == str(len(riddle_question.strip()[-13:-2])):
-            methods.scroll_text("\nThe chest opens, and reveals a key.\n")
-            values.blue_key2 = True
-            riddle = False
-        elif riddle_guess == "I give up":
-            methods.scroll_text("\nThe chest remains stagnant.\n")
-            riddle = False
+            if riddle_guess == len(riddle_question.strip()[-13:-2]):
+                methods.scroll_text("\nThe chest opens, and reveals a key.\n")
+                values.blue_key2 = True
+                riddle = False
+            elif riddle_guess == "I give up":
+                riddle = False
+            else:
+                raise ValueError
+        except ValueError:
+            methods.scroll_text("\nWrong answer.\n")
+            time.sleep(1)
+
     else:
         methods.scroll_text("\nThe chest remains stagnant.\n")
 
