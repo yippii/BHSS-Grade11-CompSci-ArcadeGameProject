@@ -444,7 +444,7 @@ def boss_fight(knight):
 #------------------------ ROOMS -------------------------------------------------------------------------------------------------------------
 
 def mh(knight):
-    knight.goto(0, 110)
+    knight.goto(0, 80)
     methods.clear_screen()
     methods.scroll_text("You enter into the mess hall, where you encounter a Goblin eating raw fish.")
 
