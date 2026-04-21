@@ -640,7 +640,6 @@ def runeRoom(knight):
     time.sleep(0.5)
     methods.scroll_text(" I have roads, but no one travels them.'")
     time.sleep(1.5)
-    methods.scroll_text("You must press one of the four symbols to unseal the chest behind the pedestal.")
     methods.scroll_text('(Type your answer, or "I give up" to leave empty-handed)\n')
 
     solved = False
@@ -660,12 +659,27 @@ def runeRoom(knight):
             time.sleep(1)
             methods.scroll_text("Inside: a vial of shimmering liquid and a torn journal page.")
             time.sleep(1)
-            methods.scroll_text("The journal reads: 'The Necromancer fears only one thing — his own name spoken aloud.'")
-            time.sleep(1)
             values.potion_num += 2
             methods.scroll_text("You gained 2 stamina potions!")
             methods.scroll_text("You have " + str(values.potion_num) + " potions left!")
             values.room_cleared += 1
+
+            choice = methods.ask_fixed_bottom(
+                "what will you do?",
+                ["1", "2"],
+                [
+                    "You have two options",
+                    "1. Read the journal",
+                    "2. Pocket it and move on",
+                ],
+            )
+            match choice:
+                case "1":
+                    journal_entry()
+                case "2":
+                    methods.scroll_text("You stuff the journal into your pack. Maybe later.")
+                    time.sleep(1)
+
             solved = True
         elif guess in ["MOON", "SUN", "STAR", "VOID"]:
             attempts += 1
@@ -676,18 +690,76 @@ def runeRoom(knight):
             else:
                 methods.scroll_text("The chamber locks. You've exhausted the pedestal's patience.")
                 time.sleep(1)
-                methods.scroll_text("You leave with nothing but singed fingertips.")
-                time.sleep(1)
+                end4()
         else:
             attempts += 1
             methods.scroll_text("\nNothing happens. The symbols stare back at you.")
             if attempts < max_attempts:
                 methods.scroll_text("Attempts remaining: " + str(max_attempts - attempts))
             else:
-                methods.scroll_text("The runes go dark. The room seals itself. You leave empty-handed.")
+                methods.scroll_text("The runes go dark. The room seals itself.")
                 time.sleep(1)
+                end4()
 
     time.sleep(1.5)
+
+def journal_entry():
+    methods.clear_screen()
+    methods.scroll_text("The pages are warped and water-stained, but still legible.")
+    time.sleep(1)
+    methods.scroll_text("You sit against the pedestal and read.")
+    time.sleep(1.5)
+
+    methods.scroll_text("--- PAGE 1 ---")
+    time.sleep(0.5)
+    methods.scroll_text("'Day 1. We landed on the isle at dawn. The captain called it a routine scouting mission.'")
+    time.sleep(1)
+    methods.scroll_text("'I have a bad feeling. The trees here don't move, even in the wind.'")
+    time.sleep(1.5)
+
+    methods.scroll_text("--- PAGE 2 ---")
+    time.sleep(0.5)
+    methods.scroll_text("'Day 4. Two of our party have gone missing. No screams. No struggle. Just... gone.'")
+    time.sleep(1)
+    methods.scroll_text("'We found their boots outside the castle gate, neatly placed side by side.'")
+    time.sleep(1)
+    methods.scroll_text("'The captain says not to worry. I think the captain is an idiot.'")
+    time.sleep(1.5)
+
+    methods.scroll_text("--- PAGE 3 ---")
+    time.sleep(0.5)
+    methods.scroll_text("'Day 9. I have been hiding in the walls. I can hear HIM walking the halls at night.'")
+    time.sleep(1)
+    methods.scroll_text("'He speaks to the dead. He calls them by name. He called MY name last night.'")
+    time.sleep(1)
+    methods.scroll_text("'I do not know how he knows it. I have told no one on this isle.'")
+    time.sleep(1.5)
+
+    methods.scroll_text("--- PAGE 4 ---")
+    time.sleep(0.5)
+    methods.scroll_text("'Day 14. I found the secret doors. There are two chests hidden behind them.'")
+    time.sleep(1)
+    methods.scroll_text("'I have split the keys and scattered them. He must never open those chests.'")
+    time.sleep(1)
+    methods.scroll_text("'If someone worthy finds this — find the blue keys. Find the chests.'")
+    time.sleep(1)
+    methods.scroll_text("'What is inside will turn the tide. I am certain of it.'")
+    time.sleep(1.5)
+
+    methods.scroll_text("--- FINAL PAGE ---")
+    time.sleep(0.5)
+    methods.scroll_text("'Day 17. He knows I am here. I can hear him on the other side of this wall.'")
+    time.sleep(1)
+    methods.scroll_text("'If you are reading this, I did not make it.'")
+    time.sleep(1)
+    methods.scroll_text("'The Necromancer fears only one thing — his own name spoken aloud.'")
+    time.sleep(1)
+    methods.scroll_text("'His name is... is...'")
+    time.sleep(1.5)
+    methods.scroll_text("The rest of the page is burned away.")
+    time.sleep(1)
+    methods.scroll_text("You close the journal slowly.")
+    time.sleep(2)
 
 def archeryRange(knight):
     knight.goto(-80, -55)
@@ -875,6 +947,24 @@ def endLEBRON():
         methods.scroll_text("ENDING: THE LEBRON CHRONICLES. You get a participation trophy and a mediocre benefits package.")
         input("Press enter to end...")
         sys.exit()
+
+def end4():
+    methods.scroll_text("The runes flare a blinding crimson.")
+    time.sleep(1)
+    methods.scroll_text("The walls close in. The air drains from the chamber.")
+    time.sleep(1)
+    methods.scroll_text("You try to run, but the door has vanished — replaced by solid stone.")
+    time.sleep(1.5)
+    methods.scroll_text("The pedestal cracks. A voice echoes through the room:")
+    time.sleep(1)
+    methods.scroll_text("'The unworthy do not leave this place.'")
+    time.sleep(1.5)
+    methods.scroll_text("The last thing you see is the four symbols, pulsing... then dark.")
+    time.sleep(1)
+    methods.scroll_text("GAME OVER — Outsmarted by stone. The Crimson Isle keeps its secrets.")
+    methods.scroll_text("Rooms cleared: " + str(values.room_cleared) + "  |  Potions remaining: " + str(values.potion_num))
+    input("Press enter to end...")
+    sys.exit()
 
 def end_stamina():
     methods.scroll_text("Your legs give out beneath you.")
