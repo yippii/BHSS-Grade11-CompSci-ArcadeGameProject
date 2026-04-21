@@ -12,12 +12,6 @@ have_crossbow = False
 
 blue_key1 = False
 blue_key2 = False
-blue_key3 = False
-
-green_key1 = False
-green_key2 = False
-green_key3 = False
-
 
 room_cleared = 0
 kingsHoard_ROOM = False

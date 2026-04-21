@@ -323,6 +323,7 @@ def room3(knight):
             
 
 def room4(knight):
+    methods.clear_screen()
     knight.goto(-40, -145)
     methods.scroll_text("As you turn, the next hallway reveals only two doors: an Archery Range and a staircase delving deeper into the castle.")
 
@@ -383,7 +384,7 @@ def L2():
 
 def L2room2(knight):
     knight.goto(-130, 167)
-    methods.scroll_text("The hallway continues, and you find yourself facing a doorway before you: a room pulsing with unsettling activity, and a faint, desperate scream suggesting something terrible is happening within.")
+    methods.scroll_text("The hallway continues, and you find yourself facing two doorways before you: one pulsing with unsettling activity, and a faint, desperate scream suggesting something terrible is happening within.")
 
     choice = methods.ask_fixed_bottom(
         "what will you do?",
@@ -391,7 +392,7 @@ def L2room2(knight):
         [
             "You have two options",
             "1. Explore the Quiver Room",
-            "2. Explore into Kings Hoard.",
+            "2. Explore the Kings Hoard.",
         ],
     )
 
@@ -469,6 +470,26 @@ def hm(knight):
             methods.scroll_text("You have "+ str(values.potion_num) + " potions left!")
 
             values.room_cleared = values.room_cleared + 1
+
+            #Letter
+            methods.clear_screen()
+            methods.scroll_text("The goblin drops a torn letter, drenched in spoiled wine.")
+            methods.scroll_text("You can barely make out the gist of the letter thanks to some bolded words.\n")
+
+            methods.scroll_text("If uyo ___ tish ___, knwo taht a ___ ftae hsa blefalen me.")
+
+            methods.scroll_text("Stradned on ___ fergotton isle, I ___ my dyas hdiing form teh", end=" ")
+            methods.scroll_text("herrific ___ taht ___ tish desoltea ___.")
+
+            methods.scroll_text("Threough mnay nrarow ___ form ___ dinezens of tish hantedu", end=" ") 
+            methods.scroll_text("___, I hvae uncevered ___" + "\033[1m" + "sretce droo." + "\033[0m")
+
+            methods.scroll_text("Tshee lade to untdol ___, btu to ensrue taht no ___ gets", end=" ")
+            methods.scroll_text("thier grudby ___ on tmeh, I hvae lckoed ___, adn", end=" ")
+            methods.scroll_text("\033[1m" + "hiddne tis kyse" + "\033[0m" + "___ teh ___.")
+
+            methods.scroll_text("Godo lkcu, felolw advanturer.")
+            time.sleep(3)
         case "2":
             methods.scroll_text("You back away slowly and leave the mess hall.")
     # combat.battle_menu()
@@ -542,7 +563,7 @@ def lab(knight):
     methods.scroll_text("As you enter the alchemy lab, you find a bunch of documents explaining how to make a stamina potion.")
     # + Potion
     values.potion_num += 1
-    methods.scroll_text("You have gained"+ str(constants.STAMINA_POTION_GAIN) + "stamina potions!")
+    methods.scroll_text("You have gained" + str(constants.STAMINA_POTION_GAIN) + "stamina potions!")
     methods.scroll_text("You have " + str(values.potion_num) + " potions left!")
     time.sleep(1.5)
     values.room_cleared = values.room_cleared + 1
@@ -662,11 +683,22 @@ def quiverRoom(knight):
 def kingsHoard(knight):
     knight.goto(-100, -25)
     methods.clear_screen()
-    methods.scroll_text("You enter the Quiver Room. You find a crossbow")
+    methods.scroll_text("You enter the Kings Hoard. You find a crossbow")
     values.have_crossbow = True
     values.arrow_amount = values.arrow_amount + 2 * constants.ARROW_GAIN
     values.room_cleared = values.room_cleared + 1
-    values.kingsHoard_ROOM = True
+    if values.blue_key1 == True and values.blue_key2 == True:
+        kingsHoard_ROOM = False
+        methods.scroll_text("Peering behind a mountain of gold, you spot a gilded diamond chest with two keyholes.")
+        time.sleep(1)
+        methods.scroll_text("You use the two blue keys you found to open the chest, but only a glimmering blue gemstone is inside.")
+        time.sleep(1)
+        methods.scroll_text("Instinctively, you reach out towards the gemstone, and as your fingers brush against it, a surge of energy courses through your body.")
+        time.sleep(1)
+        methods.scroll_text("Without a doubt, you know that you can overcome whatever challenge lies ahead of you now.")
+    else:
+        kingsHoard_ROOM = True
+
     boss_fight(knight)
 
 #------------------------------------- ENDINGS ----------------------------------------------------------------------------------------
@@ -710,7 +742,7 @@ def end2():
         time.sleep(1)
 
     methods.scroll_text("GAME OVER. You were the right warrior. Just the wrong moment.")
-    input("Press any key to end...")
+    input("Press enter to end...")
     sys.exit()
 
 def end3():
@@ -781,12 +813,10 @@ def win1():
         time.sleep(1)
         methods.scroll_text("It strikes the Necromancer square in the chest, shattering his amulet.")
         end2()
-
     else:
         methods.scroll_text("You charge, sword raised, screaming the names of your fallen teammates.")
         time.sleep(1)
         methods.scroll_text("Blade meets curse. The Necromancer did not expect sheer will.")
-
         end2()
 
     time.sleep(1.5)
@@ -805,7 +835,7 @@ def win1():
 
     methods.scroll_text("Swords: " + str(values.sword_amount) + "  |  Arrows: " + str(values.arrow_amount) + "  |  Rooms cleared: " + str(values.room_cleared))
     time.sleep(1)
-    methods.scroll_text("YOU WIN. The legend of the Crimson Isle will be told for generations.")
+    methods.scroll_text("YOU WIN. The legend of The Crimson Isle will be told for generations.")
     input("Press enter to end...")
     sys.exit()
 
@@ -838,12 +868,16 @@ def game_init():
     time.sleep(1.5)
     methods.scroll_text("They fall dead at your feet.\n")
     time.sleep(2)
-    methods.scroll_text("Returning outside, you know that the rest of your team has suffered the same fate.")                        
+    methods.scroll_text("Returning outside, you know that the rest of your team has suffered the same fate.")     
+    time.sleep(1)                   
     methods.scroll_text("Consumed with a desire for revenge, you know that you must avenge them.")
-    methods.scroll_text("Grabbing their swords, you leave the camp to begin your journey.")
-    methods.scroll_text("Looking up, you see a forbidding castle high up on a towering mountain, glowing with crimson light.")
-    methods.scroll_text("You know where you must go.")
     time.sleep(1)
+    methods.scroll_text("Grabbing their swords, you leave the camp to begin your journey.")
+    time.sleep(1)
+    methods.scroll_text("Looking up, you see a forbidding castle high up on a towering mountain, glowing with crimson light.")
+    time.sleep(1)
+    methods.scroll_text("You know where you must go.")
+    time.sleep(2)
     methods.clear_screen()
     #time.sleep(1)
     play_music("F4T3.mp3")
