@@ -700,7 +700,7 @@ def kingsHoard(knight):
     values.arrow_amount = values.arrow_amount + 2 * constants.ARROW_GAIN
     values.room_cleared = values.room_cleared + 1
     if values.blue_key1 == True and values.blue_key2 == True:
-        kingsHoard_ROOM = False
+        values.kingsHoard_ROOM = False
         methods.scroll_text("Peering behind a mountain of gold, you spot a gilded diamond chest with two keyholes.")
         time.sleep(1)
         methods.scroll_text("You use the two blue keys you found to open the chest, but only a glimmering blue gemstone is inside.")
@@ -709,7 +709,7 @@ def kingsHoard(knight):
         time.sleep(1)
         methods.scroll_text("Without a doubt, you know that you can overcome whatever challenge lies ahead of you now.")
     else:
-        kingsHoard_ROOM = True
+        values.kingsHoard_ROOM = True
 
     boss_fight(knight)
 
@@ -754,6 +754,7 @@ def end2():
         time.sleep(1)
 
     methods.scroll_text("GAME OVER. You were the right warrior. Just the wrong moment.")
+    methods.scroll_text("Swords: " + str(values.sword_amount) + "  |  Arrows: " + str(values.arrow_amount) + "  |  Rooms cleared: " + str(values.room_cleared))
     input("Press enter to end...")
     sys.exit()
 
@@ -769,6 +770,7 @@ def end3():
         time.sleep(1)
 
     methods.scroll_text("GAME OVER. You were the right warrior. Just the wrong moment.")
+    methods.scroll_text("Swords: " + str(values.sword_amount) + "  |  Arrows: " + str(values.arrow_amount) + "  |  Rooms cleared: " + str(values.room_cleared))
     input("Press enter to end...")
     sys.exit()
 
@@ -807,11 +809,15 @@ def endLEBRON():
 
 def win1():
 
+    if values.room_cleared >= 2:
+        end2()
+
     if values.room_cleared >= 8:
         methods.scroll_text("But you are not the same adventurer who stepped off that boat.")
         time.sleep(1)
         methods.scroll_text("You cleared " + str(values.room_cleared) + " rooms. You bled for every one of them.")
         time.sleep(1)
+
     else:
         methods.scroll_text("You are battered, but unbroken.")
         time.sleep(1)
