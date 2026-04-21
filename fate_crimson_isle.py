@@ -524,17 +524,20 @@ def closet(knight):
     methods.scroll_text("You presume that you must solve the riddle to open the chest:")
     methods.scroll_text('(You can also give up by typing, "I give up")\n')
 
+    giving_up = input("Do you want to give up?\n: ")
+
     while riddle:
         methods.scroll_text(riddle_question)
         try:
-            riddle_guess = int(input("  : "))
+            riddle_guess = (input("  : "))
         except:
             methods.scroll_text("\nThe chest remains stagnant.\n")
-        if riddle_guess == len(riddle_question.strip()[-13:-2]):
+        if riddle_guess == str(len(riddle_question.strip()[-13:-2])):
             methods.scroll_text("\nThe chest opens, and reveals a key.\n")
             values.blue_key2 = True
             riddle = False
         elif riddle_guess == "I give up":
+            methods.scroll_text("\nThe chest remains stagnant.\n")
             riddle = False
     else:
         methods.scroll_text("\nThe chest remains stagnant.\n")
@@ -576,7 +579,7 @@ def lab(knight):
     methods.scroll_text("As you enter the alchemy lab, you find a bunch of documents explaining how to make a stamina potion.")
     # + Potion
     values.potion_num += 1
-    methods.scroll_text("You have gained" + str(constants.STAMINA_POTION_GAIN) + "stamina potions!")
+    methods.scroll_text("You have gained 1 stamina potions!")
     methods.scroll_text("You have " + str(values.potion_num) + " potions left!")
     time.sleep(1.5)
     values.room_cleared = values.room_cleared + 1
@@ -678,7 +681,7 @@ def Forgemaster(knight):
             time.sleep(2)
             methods.scroll_text("You defeated the goblin! You found 3 swords.")
             values.sword_amount += constants.SWORDS_GAIN
-            methods.scroll_text("You Have" + str(values.sword_amount) + " swords left!")
+            methods.scroll_text("You Have " + str(values.sword_amount) + " swords left!")
             values.room_cleared = values.room_cleared + 1
         case "2":
             methods.scroll_text("You back away slowly and leave the forgemaster's room.")
