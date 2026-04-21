@@ -256,7 +256,7 @@ def room1():
     match choice:
         case "1":
             methods.clear_screen()
-            hm(knight)
+            mh(knight)
             room2(knight)
         case "2":
             methods.clear_screen()
@@ -443,10 +443,10 @@ def boss_fight(knight):
 
 #------------------------ ROOMS -------------------------------------------------------------------------------------------------------------
 
-def hm(knight):
+def mh(knight):
     knight.goto(0, 110)
     methods.clear_screen()
-    methods.scroll_text("You enter into the mess hall, where you encounter a Goblin eating pizza.")
+    methods.scroll_text("You enter into the mess hall, where you encounter a Goblin eating raw fish.")
 
     choice = methods.ask_fixed_bottom(
         "what will you do?",
@@ -492,8 +492,6 @@ def hm(knight):
             time.sleep(3)
         case "2":
             methods.scroll_text("You back away slowly and leave the mess hall.")
-    # combat.battle_menu()
-    # time.sleep(2)
 
 def armory(knight):
     knight.goto(-230, 25)
