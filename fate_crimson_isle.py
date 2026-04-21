@@ -517,7 +517,7 @@ def armory(knight):
 def closet(knight):
     knight.goto(110, 200)
     methods.clear_screen()
-    riddle_question = " How many letters are in the alphabet?"
+    riddle_question = "How many letters are in the alphabet?"
     riddle = True
 
     methods.scroll_text("You find a locked chest with a riddle on it.")
