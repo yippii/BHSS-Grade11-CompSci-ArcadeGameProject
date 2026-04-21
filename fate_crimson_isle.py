@@ -53,15 +53,22 @@ def title_screen():
     title.penup()
     screen.update()
 
-    parser = argparse.ArgumentParser(description="Fate: The Crimson Isle")
-    parser.add_argument("-s", "--skip", action="store_true", help="Skip Game")
+    try:
+        parser = argparse.ArgumentParser(description="Fate: The Crimson Isle", exit_on_error=False)
+        parser.add_argument("-s", "--skip", action="store_true", help="Skip Game")
+        args = parser.parse_args()
 
-    # click to exit
-    def start_game(x, y):
-        if parser.parse_args().skip:
-            continueOnTerminal()
-            room1()
-        else:
+        # click to exit
+        def start_game(x, y):
+            if args.skip:
+                continueOnTerminal()
+                room1()
+            else:
+                continueOnTerminal()
+                game_init()
+                room1()
+    except argparse.ArgumentError:
+        def start_game(x, y):
             continueOnTerminal()
             game_init()
             room1()
