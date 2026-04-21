@@ -478,15 +478,11 @@ def hm(knight):
 
             methods.scroll_text("If uyo ___ tish ___, knwo taht a ___ ftae hsa blefalen me.")
 
-            methods.scroll_text("Stradned on ___ fergotton isle, I ___ my dyas hdiing form teh", end=" ")
-            methods.scroll_text("herrific ___ taht ___ tish desoltea ___.")
+            methods.scroll_text("Stradned on ___ fergotton isle, I ___ my dyas hdiing form teh herrific ___ taht ___ tish desoltea ___.")
 
-            methods.scroll_text("Threough mnay nrarow ___ form ___ dinezens of tish hantedu", end=" ") 
-            methods.scroll_text("___, I hvae uncevered ___" + "\033[1m" + "sretce droo." + "\033[0m")
+            methods.scroll_text("Threough mnay nrarow ___ form ___ dinezens of tish hantedu ___, I hvae uncevered ___" + "\033[1m" + "sretce droo." + "\033[0m")
 
-            methods.scroll_text("Tshee lade to untdol ___, btu to ensrue taht no ___ gets", end=" ")
-            methods.scroll_text("thier grudby ___ on tmeh, I hvae lckoed ___, adn", end=" ")
-            methods.scroll_text("\033[1m" + "hiddne tis kyse" + "\033[0m" + "___ teh ___.")
+            methods.scroll_text("Tshee lade to untdol ___, btu to ensrue taht no ___ gets thier grudby ___ on tmeh, I hvae lckoed ___, adn \033[1m" + "hiddne tis kyse" + "\033[0m" + "___ teh ___.")
 
             methods.scroll_text("Godo lkcu, felolw advanturer.")
             time.sleep(3)
