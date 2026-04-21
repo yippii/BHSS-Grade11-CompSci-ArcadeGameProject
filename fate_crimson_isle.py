@@ -133,9 +133,9 @@ def drawMapL2():
         |     |   |                         | 
         |     |   +-----+---   ---+    -----+
         |     |         |         |         |
-    +---+  -  +------+  +---------+         |
-    |      |         |            |         |
-    |      |         |            +---------+
+    +---+  -  +-----+   +---------+         |
+    |      |        |             |         |
+    |      |        |             +---------+
     +--   ------   --------------+
     |                            |
     |                            |
@@ -430,6 +430,7 @@ def hm(knight):
             # Add blue key and stamina potion to inventory here
             values.blue_key1 = True
             values.potion_num += 1
+            methods.scroll_text("You have gained 1 stamina potions!")
             methods.scroll_text("You have "+ str(values.potion_num) + " potions left!")
 
             values.room_cleared = values.room_cleared + 1
@@ -506,6 +507,7 @@ def lab(knight):
     methods.scroll_text("As you enter the alchemy lab, you find a bunch of documents explaining how to make a stamina potion.")
     # + Potion
     values.potion_num += 1
+    methods.scroll_text("You have gained"+ str(constants.STAMINA_POTION_GAIN) + "stamina potions!")
     methods.scroll_text("You have " + str(values.potion_num) + " potions left!")
     time.sleep(1.5)
     values.room_cleared = values.room_cleared + 1
@@ -516,6 +518,7 @@ def elixirVault(knight):
     methods.scroll_text("As you enter The Elixir Vault, you find a bunch potions lying around. You take two of them.")
     # + Potion
     values.potion_num += 2
+    methods.scroll_text("You have gained 2 stamina potions!")
     methods.scroll_text("You have " + str(values.potion_num) + " potions left!")
     time.sleep(1.5)
     values.room_cleared = values.room_cleared + 1
@@ -581,6 +584,7 @@ def Herbalist(knight):
     methods.scroll_text("As you enter the alchemy lab, you find a bunch of documents explaining how to make a stamina potion.")
     # + Potion
     values.potion_num += 1
+    methods.scroll_text("You have gained 1 stamina potions!")
     methods.scroll_text("You have " + str(values.potion_num) + " potions left!")
     time.sleep(1.5)
     values.room_cleared = values.room_cleared + 1
