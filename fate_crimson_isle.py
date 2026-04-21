@@ -739,7 +739,6 @@ def end1():
     input("Press enter to end...")
     sys.exit()
 
-
 def end2():
 
     methods.scroll_text("Your fate is cruel.")
@@ -806,6 +805,23 @@ def endLEBRON():
         input("Press enter to end...")
         sys.exit()
 
+def end_stamina():
+    methods.scroll_text("Your legs give out beneath you.")
+    time.sleep(1)
+    methods.scroll_text("The potions are gone. The wounds are too many.")
+    time.sleep(1)
+    methods.scroll_text("You slump against the cold stone wall, sword slipping from your fingers.")
+    time.sleep(1.5)
+    methods.scroll_text("The Necromancer steps over you without even glancing down.")
+    time.sleep(1)
+    methods.scroll_text("'Pathetic,' he murmurs. 'I expected more from LeBron's errand boy.'")
+    time.sleep(1.5)
+    methods.scroll_text("The torches go dark. The cold creeps in.")
+    time.sleep(1)
+    methods.scroll_text("GAME OVER — Drained dry. The Crimson Isle does not forgive the weak.")
+    methods.scroll_text("Potions used: all of them  |  Rooms cleared: " + str(values.room_cleared))
+    input("Press enter to end...")
+    sys.exit()
 
 def win1():
 

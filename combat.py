@@ -33,7 +33,7 @@ def battle_menu():
         elif choice == "3":
             battle_flee()
     else:
-        fate_crimson_isle.end1()
+        fate_crimson_isle.end_stamina()
 
 
 # Post-battle report, initiated from sword_fighting(), bow_fighting() and crossbow_fighting()
